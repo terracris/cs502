@@ -6,11 +6,16 @@
 #include <sys/resource.h>
 #include <sys/time.h>
 #include <math.h>
+#include <sstream>
+#include <vector>
 
 using namespace std;
 
 extern char **environ;
 int time_to_millis(long int tv_sec, long int tv_usec);
+int handle_command(string command);
+int shell();
+vector<char *> split(string command);
 
 /*
 
@@ -24,15 +29,67 @@ int time_to_millis(long int tv_sec, long int tv_usec);
 */
 int main(int argc, char **argv) {
     
-    if (argc < 1) {
-        cerr << "Not enough input arguments\n";
-        exit(1);
+  if (argc > 1) {
+    // if we have more than one argument, we know we actually have a command
+        // handle_command(argv);
+        cout << "whoops!" << endl;
+    }
+    else {
+        shell();
+    }
+    
+
+}
+
+int shell() {
+    string command;
+    cout << "==> ";
+
+    while(getline(cin, command)) {
+        if (command == "exit") 
+            break;
+
+        if(command.empty()) {
+            continue;
+        }
+
+        handle_command(command);
+        cout << "==> ";
     }
 
-    cout << "command: " << argv[1] << "\n";
-    cout << "input: " << argv[2] << "\n";
+    cout << "got the end of file or exit" << endl;
 
-    char *argvNew[5];
+   exit(0); 
+}
+
+vector<char *> split(string command) {
+    // create an input string stream from the commands
+    istringstream iss(command);
+
+    // vector to store individual words
+    vector<char *> words;
+
+    // Read words from the input string stream
+    char * word;
+
+    // the >> operator automatically splits strings by spaces 
+    while(iss >> word) {
+        char *p = (char *) malloc(sizeof(char) * (strlen(word) + 1));
+        strcpy(p, word);
+        words.push_back(p);
+    }
+
+    return words;
+}
+
+int handle_command(string command) { 
+
+    vector<char *> commands = split(command);
+
+    cout << "command: " << commands[0] << "\n";
+    cout << "input: " << commands[1] << endl;
+
+    char *argvNew[38]; // +1 for NULL
     int pid;
     struct timeval start, end;
 
@@ -45,15 +102,25 @@ int main(int argc, char **argv) {
     }
     else if(pid == 0) {
         // child process
+        int i = 0;
+        for(char * w : commands) {
+            cout << "word: " << w << endl;
+            argvNew[i] = w;
+            i++;
+        }
 
-        argvNew[0] = argv[1]; // the command we wish to execute
-        argvNew[1] = argv[2]; // the file we wish to complete that command on
-        argvNew[2] = NULL;
+        argvNew[i] = NULL;
+
+        cout << "execvp item 1: " << argvNew[0] << endl;
+        cout << "execvp item 2: " << argvNew[1] << endl;
+        
 
         if(execvp(argvNew[0], argvNew) < 0) {
             cerr << "Execute error\n";
             exit(1);
         }
+
+        exit(0);
     
     }
     else {
@@ -82,6 +149,7 @@ int main(int argc, char **argv) {
         }
     }
 
+    return 0;
 }
 
 /**
