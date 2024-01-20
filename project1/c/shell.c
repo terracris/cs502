@@ -10,6 +10,7 @@
 #include "shell.h"
 #include "process.h"
 
+int handle_command(char** commands, struct Process* bg_tasks);
 
 int shell() {
     char* buffer;
@@ -19,20 +20,22 @@ int shell() {
     char* prompt;
 
     // dynamically allocate variables and linked list for background tasks
-    bg_tasks = (struct Process*) malloc(sizeof(struct Process));
+    bg_tasks = create_process(); 
     buffer = (char *) malloc(bufsize * sizeof(char)); // this allocates 128 bytes of memory. it returns the starting memory address of the string
     prompt = (char *) malloc(MAX_PROMPT_LENGTH * sizeof(char));
    
     set_prompt(prompt, "==>");
-    initialize_tasks(bg_tasks); // sets certain values to NULL
-
     printf("%s", prompt);
 
     while(getline(&buffer, &bufsize, stdin) > 0) {
         buffer[strcspn(buffer, "\n")] = 0; // Removes newline character
             
         char** commands = split(buffer);
-        handle_command(commands, bg_tasks);
+
+        // handle_command returns -1, we know to terminate the while loop
+        if (handle_command(commands, bg_tasks) == -1) {
+            break;
+        }
         
         printf("%s", prompt);
     }
@@ -42,61 +45,22 @@ int shell() {
     return 0;
 }
 
-int can_exit(struct Process* tasks) {
-
-    return calculate_num_tasks(tasks) == 0;
-}
-
-int is_background(char** commands) {
-    int length = strlen(commands); // the array is null terminated so I am hoping this works
-
-    // strcmp returns 0 if same. Therefore it is a background task
-    return !strcmp(commands[length - 1], "&");
-}
-
-char** split(char* command) {
-    
-    // creates an array of strings (an array of array of characters)
-    char** commands = (char**) malloc((MAX_COMMANDS + 1)* sizeof(char*)); // + 1 for NULL terminator
-    char* token = strtok(command, " ");
-
-    // loop through the string to extract all other tokens
-    int i = 0;
-    while(token != NULL) {
-        commands[i] = token;
-        i++;
-        token = strtok(NULL, " ");
-    }
-    
-    commands[i] = NULL; // terminates after the last token
-
-    for (int j = 0; j < i; j++)
-    {
-        printf("Current command: '%s'\n", commands[j]);
-    }
-    
-    return commands;
-}
-
-void set_prompt(char* prompt, char* phrase) {
-    strcpy(prompt, phrase);
-}
-
-void temp() {
-    if(strcmp(buffer, "exit") == 0) {
-            if (can_exit(bg_tasks))
-                break;
-            else
-                printf("waiting");
-
-        }
-}
-
 int handle_command(char** commands, struct Process* bg_tasks) {
     int pid;
     struct timeval start, end;
     int background = is_background(commands);
 
+    // if exit & size() == 0, don't even bother forking
+    if(strcmp(commands[0], "exit") == 0) {
+        if(size(bg_tasks) == 0) {
+            // -1 is the end shell signal
+            return -1;
+        } else {
+            // 0 is the keep going or everything is fine
+            printf("background processes still running");
+            return 0;
+        }
+    }
 
     if((pid = fork()) < 0) {
         fprintf(stderr, "Fork error\n");
@@ -152,16 +116,63 @@ int handle_command(char** commands, struct Process* bg_tasks) {
 
         */
 
-       add_bg_task(bg_tasks, pid, commands[0], start);
+       insert(bg_tasks, pid, commands[0]);
     }
     
        return 0;
     }
 }
 
-void update_on_set(char** commands, char* prompt) {
+char** split(char* command) {
+    
+    // creates an array of strings (an array of array of characters)
+    char** commands = (char**) malloc((MAX_COMMANDS + 1)* sizeof(char*)); // + 1 for NULL terminator
+    char* token = strtok(command, " ");
 
- if(strcmp(commands[0], "set") == 0) {
-            strcpy(prompt, commands[3]);
+    // loop through the string to extract all other tokens
+    int i = 0;
+    while(token != NULL) {
+        commands[i] = token;
+        i++;
+        token = strtok(NULL, " ");
+    }
+    
+    commands[i] = NULL; // terminates after the last token
+
+    for (int j = 0; j < i; j++)
+    {
+        printf("Current command: '%s'\n", commands[j]);
+    }
+    
+    return commands;
+}
+
+
+void set_prompt(char* prompt, char* phrase) {
+    strcpy(prompt, phrase);
+}
+
+int is_background(char** commands) {
+
+    int i = 0;
+    char* command = commands[i];
+
+    while(command != NULL) {
+        if(strcmp(command, "&") == 0) {
+            return 1;
         }
+        i++;
+        command = commands[i];
+    }
+
+    // strcmp returns 0 if same. Therefore it is a background task
+    return 0;
+}
+
+
+int main() {
+
+    shell();
+
+    return 0;
 }

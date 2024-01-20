@@ -89,6 +89,7 @@ struct Process* pop(struct Process* tasks, int pid) {
         if(curr->pid == pid) {
             struct Process* temp = curr;
             prev->next = curr->next;
+            temp->next = NULL;
             return temp;
         }
 
@@ -123,6 +124,19 @@ int contains(struct Process* tasks, int pid) {
     return 0;
 }
 
+void delete(struct Process* tasks) {
+
+    struct Process* curr = tasks;
+
+    for(int i = 0; i < size(tasks); i++) {
+        struct Process* tmp = curr;
+        curr = curr->next;
+        free(tmp);
+    }
+
+    printf("succesfully freed the item\n");
+}
+
 struct Process* update_end_time(struct Process* tasks, int pid, struct timeval end) {
 
     struct Process* tmp = get(tasks, pid);
@@ -134,11 +148,12 @@ struct Process* update_end_time(struct Process* tasks, int pid, struct timeval e
     return tmp;
 }
 
+
 int size(struct Process* bg_tasks) {
     int num_tasks = 0;
     struct Process* curr = bg_tasks;
 
-    while(curr != NULL) {
+    while(curr->pid != UNDEFINED_PROCESS_IDENTIFIER) {
         num_tasks++;
         curr = curr->next;
     }
@@ -151,22 +166,13 @@ void visualize(struct Process* tasks) {
     struct Process* curr = tasks;
 
     while(curr != NULL) {
-        printf("pid: %d --> ", curr->pid);
+        printf("pid: %d (%s) --> ", curr->pid, curr->taskName);
         curr = curr->next;
     }
+
+    printf("\n");
 }
 
-int main() {
-
-    struct Process* tasks = create_process();
-    for(int i = 0; i < 5; i++) {
-        insert(tasks, i, "hello");
-    }
-   
-    visualize(tasks);
-
-    return 0;
-}
 
 
 
