@@ -33,8 +33,11 @@ int shell() {
         char** commands = split(buffer);
 
         // handle_command returns -1, we know to terminate the while loop
-        if (handle_command(commands, bg_tasks) == -1) {
+        int handling_code = handle_command(commands, bg_tasks);
+        if (handling_code == -1) {
             break;
+        } else if (handling_code == 2) {
+            set_prompt(prompt, commands[3]);
         }
         
         printf("%s", prompt);
@@ -49,6 +52,9 @@ int handle_command(char** commands, struct Process* bg_tasks) {
     int pid;
     struct timeval start, end;
     int background = is_background(commands);
+    int returned_process;
+
+    printf("is background: %s\n", background ? "true" : "false");
 
     // if exit & size() == 0, don't even bother forking
     if(strcmp(commands[0], "exit") == 0) {
@@ -62,16 +68,30 @@ int handle_command(char** commands, struct Process* bg_tasks) {
         }
     }
 
+    // tells main shell that this is a default set command, meaning time to update
+    if(strcmp(commands[0], "set") == 0) {
+        return 2;
+    }
+
+    if(background) {
+        // remove '&' from command
+        removeAmpersand(commands);
+    }
+ 
+
+    // let the child process do its thing
+    // make the parent handle the rest
+
     if((pid = fork()) < 0) {
         fprintf(stderr, "Fork error\n");
         exit(1);
     }
     else if (pid == 0) {
         /* child process */
-    
+
+        // add start time (?)
         // get the current time before the operation
         gettimeofday(&start, NULL);
-        int i = 0;
 
         if(strcmp(commands[0], "cd") == 0) {
             if(chdir(commands[1]) != 0) {
@@ -86,24 +106,36 @@ int handle_command(char** commands, struct Process* bg_tasks) {
             free(commands);
             exit(1);
             }
+
+            return 0;
         }
     }
     else {
         // parent
 
         if(!background) {
-            int returned_process = wait(0); // wait(0) will give us what we want
-            while(1) {
+            insert(bg_tasks, pid, commands[0]);
+            printf("about to visualize\n");
+            visualize(bg_tasks);
+            print_command(commands);
+
+                returned_process = wait(0);
+                printf("got the desired process\n");
+                
+                // wait til we get the correct pid
                 if(returned_process == pid) {
-                // print the stats for the pid and then we return
-                break;
+                pop(bg_tasks, returned_process);
+                printf("foreground task completed");
+                visualize(bg_tasks);
+               
             } else if(contains(bg_tasks, returned_process)) {
                 pop(bg_tasks, returned_process);
+                printf("background task completed");
+                visualize(bg_tasks);
             }
             }
-            
-            
-    } else {
+        
+         else {
         
         // if this is a background task, we need to add this to a list of background tasks
         // this list must be made once and then updated throughout
@@ -116,7 +148,7 @@ int handle_command(char** commands, struct Process* bg_tasks) {
 
         */
 
-       insert(bg_tasks, pid, commands[0]);
+       insert(bg_tasks, pid, commands[0]);;
     }
     
        return 0;
@@ -167,6 +199,33 @@ int is_background(char** commands) {
 
     // strcmp returns 0 if same. Therefore it is a background task
     return 0;
+}
+
+void removeAmpersand(char** commands) {
+
+    int size = command_length(commands);
+    commands[size - 1] = NULL;
+}
+
+int command_length(char** commands) {
+
+    int i = 0;
+    while(commands[i] != NULL) {
+        i++;
+    }
+
+    return i;
+
+}
+
+void print_command(char** commands) {
+    int i = 0;
+
+    while(commands[i] != NULL) {
+        printf("%s ", commands[i]);
+        i++;
+    }
+    printf("\n");
 }
 
 

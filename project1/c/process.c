@@ -78,14 +78,22 @@ struct Process* get(struct Process* tasks, int pid) {
 
 struct Process* pop(struct Process* tasks, int pid) {
     // if you try to remove a pid from the linked list when there are 0 items, return null
-    if(tasks->pid == UNDEFINED_PROCESS_IDENTIFIER) {
+    if(tasks == NULL || tasks->pid == UNDEFINED_PROCESS_IDENTIFIER) {
         return NULL;
+    }
+
+    // if it is the first item, make
+    if(tasks->pid == pid) {
+        struct Process* temp = tasks;
+        tasks = tasks->next;
+
+        return temp;
     }
 
     struct Process* prev = tasks;
     struct Process* curr = tasks;
     
-    while(curr!= NULL) {
+    while(curr->pid != UNDEFINED_PROCESS_IDENTIFIER) {
         if(curr->pid == pid) {
             struct Process* temp = curr;
             prev->next = curr->next;

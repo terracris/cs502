@@ -9,5 +9,8 @@
 char** split(char* command);
 void set_prompt(char* prompt, char* phrase);
 int is_background(char** commands);
+void removeAmpersand(char** commands);
+int command_length(char** commands);
+void print_command(char** commands);
 
 #endif
