@@ -39,6 +39,8 @@ int shell() {
         } else if (handling_code == 2) {
             set_prompt(prompt, commands[3]);
         }
+
+        // getting several errors. kind of working. kind of not. 
         
         printf("%s", prompt);
     }
