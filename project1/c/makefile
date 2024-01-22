@@ -10,4 +10,4 @@ shell.o: shell.c shell.h
 	gcc -g -c shell.c
 
 clean:
-	rm -f *.o
+	rm -f *.o shell process doit

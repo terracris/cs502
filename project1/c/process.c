@@ -186,11 +186,18 @@ void visualize(struct Process *tasks)
 {
 
     struct Process *curr = tasks;
+    int i = 1;
+
+    if(tasks == NULL) {
+        printf("no active jobs\n");
+        return;
+    }
 
     while (curr != NULL)
     {
-        printf("pid: %d (%s) --> ", curr->pid, curr->taskName);
+        printf("[%d] pid: %d (%s) ", i, curr->pid, curr->taskName);
         curr = curr->next;
+        i++;
     }
 
     printf("\n");

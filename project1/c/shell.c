@@ -47,12 +47,12 @@ int shell() {
         }
 
         // getting several errors. kind of working. kind of not.
-        free(commands);
         printf("%s", prompt);
     }
 
     free(buffer);
     free(prompt);
+    printf("exited the shell\n");
     return 0;
 }
 
@@ -68,19 +68,36 @@ int handle_command(char** commands, struct Process* tasks) {
 
     // if exit & size() == 0, don't even bother forking
     if(strcmp(commands[0], "exit") == 0) {
-        if(size(tasks) == 0) {
-            // -1 is the end shell signal
-            return -1;
-        } else {
-            // 0 is the keep going or everything is fine
-            printf("background processes still running");
-            return 0;
+        if (size(tasks) > 0) {
+            printf("Waiting for background processes to finish...\n");
+
+            // Wait for all background processes to finish
+            while (size(tasks) > 0) {
+                int status;
+                pid_t pid = waitpid(-1, &status, 0);
+
+                if (pid > 0) {
+                    tasks = delete(tasks, pid);
+                    printf("Background process (PID: %d) completed.\n", pid);
+                    visualize(tasks);
+                }
+            }
+
+            printf("All background processes have finished.\n");
         }
+
+        // -1 is the end shell signal
+        return -1;
     }
 
     // tells main shell that this is a default set command, meaning time to update
     if((strcmp(commands[0], "set") == 0) && command_length(commands) == 4) {
         return 2;
+    }
+
+    if(strcmp(commands[0], "jobs") == 0) {
+        visualize(tasks);
+        return 0;
     }
 
     if(background) {
@@ -145,18 +162,21 @@ int handle_foreground(char** commands, struct Process * tasks) {
     else
     {
         // parent
-    
-            insert(tasks, pid, commands[0]); // adding task to list of tasks --> might not be necessary for synchronous tasks
-            printf("about to visualize\n");
-            visualize(tasks);
-            print_command(commands);
+     
+            tasks = insert(tasks, pid, commands[0]); // adding task to list of tasks --> might not be necessary for synchronous tasks
+            // printf("about to visualize\n");
+            // visualize(tasks);
+            // print_command(commands);
 
-            printf("Parent process is waiting for child process (PID: %d)\n", pid);
+            // printf("Parent process is waiting for child process (PID: %d)\n", pid);
 
             waitpid(pid, NULL, 0); // waiting for our desired pid
-            delete(tasks, pid); // removes given pid from linked list
-            printf("foreground task completed");
-            visualize(tasks);
+            tasks = delete(tasks, pid); // removes given pid from linked list
+            // printf("foreground task completed");
+            // visualize(tasks);
+            
+            // after all work with commands is done, only then can we actually free memory
+            free(commands);
         }
 
         return 0;
@@ -178,13 +198,13 @@ int handle_background(char **commands, struct Process *tasks)
     else if (pid == 0)
     {
         handle_foreground(commands, tasks);
-        return 0;
-    } else {
-        return 0; // if you are the parent you just return back to the loop
+        exit(0);
     }
 
-    return 0;
+    return 0; // if you are the parent you just return back to the loop
+
 }
+
 char** split(char* command) {
     
     // creates an array of strings (an array of array of characters)
