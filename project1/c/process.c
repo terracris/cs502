@@ -36,6 +36,7 @@ struct Process *insert(struct Process *tasks, int pid, char *command)
         struct Process *new = create_process(); // dynamically allocates struct process
         new->pid = pid;
         new->taskName = strdup(command); // copy the name of the command
+        new->next = NULL;
         return new;
     }
 
@@ -50,6 +51,7 @@ struct Process *insert(struct Process *tasks, int pid, char *command)
     struct Process *new = create_process();
     new->pid = pid;
     new->taskName = strdup(command);
+    new->next = NULL;
     curr->next = new;
 
     return tasks;
@@ -178,7 +180,7 @@ void visualize(struct Process *tasks)
 
     while (curr != NULL)
     {
-        printf("[%d] pid: %d (%s) ", i, curr->pid, curr->taskName);
+        printf("[%d] pid: %d (%s)\n", i, curr->pid, curr->taskName);
         curr = curr->next;
         i++;
     }

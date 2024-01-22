@@ -33,7 +33,7 @@ int shell() {
     int exit = 0;  // prompts exit flag
 
 
-    while((getline(&buffer, &bufsize, stdin) > 0) && !exit) {
+    while((!exit && getline(&buffer, &bufsize, stdin) > 0)) {
         buffer[strcspn(buffer, "\n")] = 0; // Removes newline character
             
         char** commands = split(buffer);
@@ -44,7 +44,7 @@ int shell() {
         // I will make two methods for handling input. one for updating task list, and one for updating simple commands
         switch(handling_code) {
             case 0:
-            printf("jobs listed");
+            visualize(tasks);
             break;
 
             case 1:
@@ -76,13 +76,12 @@ int shell() {
 
 int handle_command(char** commands, struct Process* tasks) {
 
-    // tells main shell that this is a default set command, meaning time to update
-    if((strcmp(commands[0], "set") == 0) && command_length(commands) == 4) {
+    if(strcmp(commands[0], "jobs") == 0) {
         return 0;
     }
 
-    if(strcmp(commands[0], "jobs") == 0) {
-        visualize(tasks);
+     // tells main shell that this is a default set command, meaning time to update
+    if((strcmp(commands[0], "set") == 0) && command_length(commands) == 4) {
         return 1;
     }
 
@@ -105,6 +104,7 @@ struct Process* handle_task(char** commands, struct Process * tasks) {
     if(strcmp(commands[0], "exit") == 0) {
         if (size(tasks) > 0) {
             printf("Waiting for background processes to finish...\n");
+            visualize(tasks);
 
             // Wait for all background processes to finish
             while (size(tasks) > 0) {
@@ -113,7 +113,7 @@ struct Process* handle_task(char** commands, struct Process * tasks) {
 
                 if (pid > 0) {
                     tasks = delete(tasks, pid);
-                    printf("Background process (PID: %d) completed.\n", pid);
+                    printf("\nBackground process (PID: %d) completed.\n", pid);
                     visualize(tasks);
                 }
             }
@@ -175,7 +175,12 @@ struct Process* handle_task(char** commands, struct Process * tasks) {
             // print_command(commands);
             int returned_process;
 
-            if (!background) {
+            if (background) {
+                 // if it is a background task, just insert it and return
+                tasks = insert(tasks, pid, commands[0]);
+                visualize(tasks);
+                return tasks;
+            } else {
                 // If not a background, wait for the current pid,
                 // if a background task completes, we should remove it from the linked list
                 while(returned_process = wait(0)) {
@@ -201,17 +206,15 @@ struct Process* handle_task(char** commands, struct Process * tasks) {
                             fprintf(stderr, "Could not get usage statistics\n");
                             exit(1);
                         }
+
+                        return tasks;
                         
                     } else if(contains(tasks, returned_process)) {
-                        tasks = delete(tasks, pid); // only time to delete from the linked list
+                        printf("\ndeleting background task\n");
+                        tasks = delete(tasks, returned_process); // only time to delete from the linked list
                     }
 
                 }
-            } else {
-                // if it is a background task, just insert it and return
-                tasks = insert(tasks, pid, commands[0]);
-                visualize(tasks);
-                return tasks;
             }
             
 }
