@@ -11,8 +11,6 @@
 #include "process.h"
 
 int handle_command(char** commands, struct Process* tasks);
-void calculate_resources(struct Process* task);
-int time_to_millis(long int seconds, long int usec);
 struct Process* handle_task(char** commands, struct Process * tasks);
 
 int shell() {
@@ -49,7 +47,7 @@ int shell() {
 
             case 1:
             // set new prompt
-            set_prompt(prompt, commands[3]);
+            prompt = set_prompt(prompt, commands[3]);
             break;
 
             case 2:
@@ -65,12 +63,12 @@ int shell() {
 
         free(commands);
         // getting several errors. kind of working. kind of not.
-        printf("%s", prompt);
+        if(!exit)
+            printf("%s", prompt);
     }
 
     free(buffer);
     free(prompt);
-    printf("exited the shell\n");
     return 0;
 }
 
@@ -98,8 +96,6 @@ struct Process* handle_task(char** commands, struct Process * tasks) {
 
     int background = is_background(commands);
 
-    printf("is background: %s\n", background ? "true" : "false");
-
     // if exit & size() == 0, don't even bother forking
     if(strcmp(commands[0], "exit") == 0) {
         if (size(tasks) > 0) {
@@ -114,7 +110,6 @@ struct Process* handle_task(char** commands, struct Process * tasks) {
                 if (pid > 0) {
                     tasks = delete(tasks, pid);
                     printf("\nBackground process (PID: %d) completed.\n", pid);
-                    visualize(tasks);
                 }
             }
 
@@ -153,6 +148,7 @@ struct Process* handle_task(char** commands, struct Process * tasks) {
             {
                 // this is fine for now. An improvement would be using pwd command
                 printf("Current directory is changed to %s\n", commands[1]);
+                exit(1);
             }
         }
         else
@@ -170,9 +166,6 @@ struct Process* handle_task(char** commands, struct Process * tasks) {
     {
         // parent
             
-            // printf("about to visualize\n");
-            // visualize(tasks);
-            // print_command(commands);
             int returned_process;
 
             if (background) {
@@ -210,7 +203,7 @@ struct Process* handle_task(char** commands, struct Process * tasks) {
                         return tasks;
                         
                     } else if(contains(tasks, returned_process)) {
-                        printf("\ndeleting background task\n");
+                        printf("Process %d completed.\n", returned_process); 
                         tasks = delete(tasks, returned_process); // only time to delete from the linked list
                     }
 
@@ -236,17 +229,12 @@ char** split(char* command) {
     
     commands[i] = NULL; // terminates after the last token
 
-    for (int j = 0; j < i; j++)
-    {
-        printf("Current command: '%s'\n", commands[j]);
-    }
-    
     return commands;
 }
 
 
-void set_prompt(char* prompt, char* phrase) {
-    strcpy(prompt, phrase);
+char* set_prompt(char* prompt, char* phrase) {
+    return strcpy(prompt, phrase);
 }
 
 int is_background(char** commands) {
@@ -283,15 +271,7 @@ int command_length(char** commands) {
 
 }
 
-void print_command(char** commands) {
-    int i = 0;
 
-    while(commands[i] != NULL) {
-        printf("%s ", commands[i]);
-        i++;
-    }
-    printf("\n");
-}
 /**
  * @brief calculates the number of milliseconds elapsed based ont he timeval
  * 
@@ -308,15 +288,4 @@ int time_to_millis(long int seconds, long int usec) {
     return result;
 }
 
-void calculate_resources(struct Process* task) {
 
-    
-}
-
-
-int main() {
-
-    shell();
-
-    return 0;
-}

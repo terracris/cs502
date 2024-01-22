@@ -7,10 +7,14 @@
 
 /* prototypes */
 char** split(char* command);
-void set_prompt(char* prompt, char* phrase);
+char* set_prompt(char* prompt, char* phrase);
 int is_background(char** commands);
 void removeAmpersand(char** commands);
 int command_length(char** commands);
 void print_command(char** commands);
+int shell();
+int time_to_millis(long int seconds, long int usec);
+
+
 
 #endif

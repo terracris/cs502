@@ -20,7 +20,6 @@ struct Process* get(struct Process* tasks, int pid);
 struct Process* pop(struct Process* tasks, int pid);
 int contains(struct Process* tasks, int pid);
 struct Process *delete(struct Process *tasks, int pid);
-// struct Process* update_end_time(struct Process* tasks, int pid, struct timeval end);
 int size(struct Process* bg_tasks);
 void visualize(struct Process* tasks);
 

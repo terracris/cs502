@@ -185,5 +185,4 @@ void visualize(struct Process *tasks)
         i++;
     }
 
-    printf("\n");
 }
