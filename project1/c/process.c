@@ -150,23 +150,6 @@ int contains(struct Process *tasks, int pid)
     return 0;
 }
 
-// struct Process *update_end_time(struct Process *tasks, int pid, struct timeval end)
-// {
-
-//     struct Process *tmp = get(tasks, pid);
-
-//     // process did not exist
-//     if(tmp == NULL) {
-//         return NULL;
-//     }
-    
-//     tmp->end = end;
-
-//     // returning in case we want to calculate the data on that one item
-//     // not sure if timeval should be a memory address or not
-//     // I will have to ask chatgpt or professor during office hours
-//     return tmp;
-// }
 
 int size(struct Process *bg_tasks)
 {

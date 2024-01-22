@@ -11,10 +11,9 @@
 #include "process.h"
 
 int handle_command(char** commands, struct Process* tasks);
-int handle_foreground(char **commands, struct Process *tasks);
-int handle_background(char **commands, struct Process *tasks);
 void calculate_resources(struct Process* task);
 int time_to_millis(long int seconds, long int usec);
+struct Process* handle_task(char** commands, struct Process * tasks);
 
 int shell() {
     char* buffer;
@@ -31,23 +30,40 @@ int shell() {
    
     set_prompt(prompt, "==>");
     printf("%s", prompt);
+    int exit = 0;  // prompts exit flag
 
-    while(getline(&buffer, &bufsize, stdin) > 0) {
+
+    while((getline(&buffer, &bufsize, stdin) > 0) && !exit) {
         buffer[strcspn(buffer, "\n")] = 0; // Removes newline character
             
         char** commands = split(buffer);
 
-        // handle_command returns -1, we know to terminate the while loop
+        // handle_command returns 2, we know to terminate the while loop
         int handling_code = handle_command(commands, tasks);
-        if (handling_code == -1) {
-            free(commands);
+
+        // I will make two methods for handling input. one for updating task list, and one for updating simple commands
+        switch(handling_code) {
+            case 0:
+            printf("jobs listed");
             break;
-        } else if (handling_code == 2) {
+
+            case 1:
+            // set new prompt
             set_prompt(prompt, commands[3]);
-        } else if(handling_code == 3) {
-            printf("Null pointer exception. Invalid input!");
+            break;
+
+            case 2:
+            exit = 1; // creates exit flag
+            // waits for all tasks to complete
+            tasks = handle_task(commands, tasks);
+            break;
+
+            case -1:
+            tasks = handle_task(commands, tasks);
+            break;
         }
 
+        free(commands);
         // getting several errors. kind of working. kind of not.
         printf("%s", prompt);
     }
@@ -60,13 +76,30 @@ int shell() {
 
 int handle_command(char** commands, struct Process* tasks) {
 
+    // tells main shell that this is a default set command, meaning time to update
+    if((strcmp(commands[0], "set") == 0) && command_length(commands) == 4) {
+        return 0;
+    }
+
+    if(strcmp(commands[0], "jobs") == 0) {
+        visualize(tasks);
+        return 1;
+    }
+
+    if(strcmp(commands[0], "exit") == 0) {
+        return 2;
+    }
+
+    return -1;
+}
+
+struct Process* handle_task(char** commands, struct Process * tasks) {
+    // let the child process do its thing
+    // make the parent handle the rest
+
     int background = is_background(commands);
 
     printf("is background: %s\n", background ? "true" : "false");
-
-    if(commands[0] == NULL) {
-        return 3;
-    }
 
     // if exit & size() == 0, don't even bother forking
     if(strcmp(commands[0], "exit") == 0) {
@@ -89,41 +122,14 @@ int handle_command(char** commands, struct Process* tasks) {
         }
 
         // -1 is the end shell signal
-        return -1;
+        return tasks;
     }
 
-    // tells main shell that this is a default set command, meaning time to update
-    if((strcmp(commands[0], "set") == 0) && command_length(commands) == 4) {
-        return 2;
-    }
-
-    if(strcmp(commands[0], "jobs") == 0) {
-        visualize(tasks);
-        return 0;
-    }
-
-    if(background) {
-        // remove '&' from command
+    if(background)
         removeAmpersand(commands);
-        handle_background(commands, tasks);
-    }
-    else
-    {
-        handle_foreground(commands, tasks);
-    }
-
-    return 0;
-}
-
-int handle_foreground(char** commands, struct Process * tasks) {
-    // let the child process do its thing
-    // make the parent handle the rest
-
-    // guaranteed to be foreground
 
     int pid;
     struct timeval start, end;
-    int returned_process;
 
      // get the current time before the operation
     gettimeofday(&start, NULL);
@@ -136,7 +142,6 @@ int handle_foreground(char** commands, struct Process * tasks) {
     else if (pid == 0)
     {
         /* child process */
-
 
         if (strcmp(commands[0], "cd") == 0)
         {
@@ -154,8 +159,7 @@ int handle_foreground(char** commands, struct Process * tasks) {
         {
             if (execvp(commands[0], commands) < 0)
             {
-                fprintf(stderr, "Execute error\n");
-                free(commands);
+                fprintf(stderr, "Execute error\n"); 
                 exit(1);
             }
 
@@ -169,66 +173,48 @@ int handle_foreground(char** commands, struct Process * tasks) {
             // printf("about to visualize\n");
             // visualize(tasks);
             // print_command(commands);
+            int returned_process;
 
-            printf("Parent process is waiting for child process (PID: %d)\n", pid);
+            if (!background) {
+                // If not a background, wait for the current pid,
+                // if a background task completes, we should remove it from the linked list
+                while(returned_process = wait(0)) {
 
-            waitpid(pid, NULL, 0); // waiting for our desired pid
-            gettimeofday(&end, NULL);
+                    if(returned_process == pid) {
+                        // print stats if foreground task completed
+                        gettimeofday(&end, NULL);
+                        long seconds = end.tv_sec - start.tv_sec;
+                        long microseconds = end.tv_usec - start.tv_usec;
+                        int elapsed = time_to_millis(seconds, microseconds);
 
-            // update_end_time(tasks, pid, end);
-            visualize(tasks);
-            long seconds = end.tv_sec - start.tv_sec;
-            long microseconds = end.tv_usec - start.tv_usec;
+                        struct rusage usage;
+                        if (getrusage(0, &usage) == 0) {
+                        printf("User CPU time (milliseconds): %d\n", time_to_millis(usage.ru_utime.tv_sec, usage.ru_utime.tv_usec));
+                        printf("System CPU time (milliseconds): %d\n", time_to_millis(usage.ru_stime.tv_sec, usage.ru_stime.tv_usec));
+                        printf("elapsed time (milliseconds): %d\n", elapsed);
+                        printf("# times process was preempted involuntarily: %ld\n", usage.ru_nivcsw);
+                        printf("# times process was preempted voluntarily: %ld\n", usage.ru_nvcsw);
+                        printf("# of major page faults: %ld\n", usage.ru_majflt);
+                        printf("# of minor page faults: %ld\n", usage.ru_minflt);
+                        printf("max resident set size used: %ld\n", usage.ru_maxrss);
+                        } else {
+                            fprintf(stderr, "Could not get usage statistics\n");
+                            exit(1);
+                        }
+                        
+                    } else if(contains(tasks, returned_process)) {
+                        tasks = delete(tasks, pid); // only time to delete from the linked list
+                    }
 
-            int elapsed = time_to_millis(seconds, microseconds);
-
-        struct rusage usage;
-        if (getrusage(RUSAGE_CHILDREN, &usage) == 0) {
-            printf("User CPU time (milliseconds): %d\n", time_to_millis(usage.ru_utime.tv_sec, usage.ru_utime.tv_usec));
-            printf("System CPU time (milliseconds): %d\n", time_to_millis(usage.ru_stime.tv_sec, usage.ru_stime.tv_usec));
-            printf("elapsed time (milliseconds): %d\n", elapsed);
-            printf("# times process was preempted involuntarily: %ld\n", usage.ru_nivcsw);
-            printf("# times process was preempted voluntarily: %ld\n", usage.ru_nvcsw);
-            printf("# of major page faults: %ld\n", usage.ru_majflt);
-            printf("# of minor page faults: %ld\n", usage.ru_minflt);
-            printf("max resident set size used: %ld\n", usage.ru_maxrss);
-        } else {
-            fprintf(stderr, "Could not get usage statistics\n");
-            exit(1);
-        }
-            // printf("foreground task completed");
-            // visualize(tasks);
+                }
+            } else {
+                // if it is a background task, just insert it and return
+                tasks = insert(tasks, pid, commands[0]);
+                visualize(tasks);
+                return tasks;
+            }
             
-            // after all work with commands is done, only then can we actually free memory
-            free(commands);
-        }
-
-        return 0;
 }
-
-int handle_background(char **commands, struct Process *tasks)
-{
-
-    // in this function, we create three processes. everything looks very similar, except we fork again if we are the parent
-    // wow, instead of copying and pasting the handle_foreground method, we can essentially just call the handle_foreground
-
-    int pid;
-
-    if ((pid = fork()) < 0)
-    {
-        fprintf(stderr, "Fork error\n");
-        exit(1);
-    }
-    else if (pid == 0)
-    {
-        handle_foreground(commands, tasks);
-        _exit(0);
-    } else {
-        tasks = insert(tasks, pid, commands[0]);
-    }
-    
-    return 0; // if you are the parent you just return back to the loop
-
 }
 
 char** split(char* command) {
