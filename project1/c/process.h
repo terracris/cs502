@@ -21,7 +21,7 @@ struct Process* insert(struct Process* tasks, int pid, char* command);
 struct Process* get(struct Process* tasks, int pid);
 struct Process* pop(struct Process* tasks, int pid);
 int contains(struct Process* tasks, int pid);
-void delete(struct Process* tasks);
+struct Process *delete(struct Process *tasks, int pid);
 struct Process* update_end_time(struct Process* tasks, int pid, struct timeval end);
 int size(struct Process* bg_tasks);
 void visualize(struct Process* tasks);
