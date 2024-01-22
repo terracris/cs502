@@ -26,7 +26,7 @@ struct Process *create_process()
     return new;
 }
 
-struct Process *insert(struct Process *tasks, int pid, char *command)
+struct Process *insert(struct Process *tasks, int pid, char *command, struct timeval start)
 {
     // check if the first item has been assigned.
     // if no first process, then we assign it.
@@ -36,6 +36,7 @@ struct Process *insert(struct Process *tasks, int pid, char *command)
         struct Process *new = create_process(); // dynamically allocates struct process
         new->pid = pid;
         new->taskName = strdup(command); // copy the name of the command
+        new->start = start; // i wonder if this will work since it is NOT a memory address
         return new;
     }
 
@@ -50,6 +51,7 @@ struct Process *insert(struct Process *tasks, int pid, char *command)
     struct Process *new = create_process();
     new->pid = pid;
     new->taskName = strdup(command);
+    new->start = start;
     curr->next = new;
 
     return tasks;

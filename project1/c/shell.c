@@ -13,6 +13,7 @@
 int handle_command(char** commands, struct Process* tasks);
 int handle_foreground(char **commands, struct Process *tasks);
 int handle_background(char **commands, struct Process *tasks);
+void calculate_resources(struct Process* task);
 
 int shell() {
     char* buffer;
@@ -162,15 +163,24 @@ int handle_foreground(char** commands, struct Process * tasks) {
     else
     {
         // parent
-     
-            tasks = insert(tasks, pid, commands[0]); // adding task to list of tasks --> might not be necessary for synchronous tasks
+            if(!contains(tasks, pid)) {
+                tasks = insert(tasks, pid, commands[0]); // adding task to list of tasks --> might not be necessary for synchronous tasks
+            } 
+            
             // printf("about to visualize\n");
             // visualize(tasks);
             // print_command(commands);
 
-            // printf("Parent process is waiting for child process (PID: %d)\n", pid);
+            printf("Parent process is waiting for child process (PID: %d)\n", pid);
 
             waitpid(pid, NULL, 0); // waiting for our desired pid
+            gettimeofday(&end, NULL);
+
+            update_end_time(tasks, pid, end);
+
+            struct Process* curr = get(tasks, pid);
+
+            calculate_resources(curr);
             tasks = delete(tasks, pid); // removes given pid from linked list
             // printf("foreground task completed");
             // visualize(tasks);
@@ -200,7 +210,8 @@ int handle_background(char **commands, struct Process *tasks)
         handle_foreground(commands, tasks);
         exit(0);
     }
-
+    
+    insert(tasks, pid, commands[0]);
     return 0; // if you are the parent you just return back to the loop
 
 }
@@ -276,6 +287,10 @@ void print_command(char** commands) {
         i++;
     }
     printf("\n");
+}
+
+void calculate_resources(struct Process* task) {
+    
 }
 
 
