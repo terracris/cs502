@@ -26,7 +26,7 @@ struct Process *create_process()
     return new;
 }
 
-struct Process *insert(struct Process *tasks, int pid, char *command, struct timeval start)
+struct Process *insert(struct Process *tasks, int pid, char *command)
 {
     // check if the first item has been assigned.
     // if no first process, then we assign it.
@@ -36,7 +36,6 @@ struct Process *insert(struct Process *tasks, int pid, char *command, struct tim
         struct Process *new = create_process(); // dynamically allocates struct process
         new->pid = pid;
         new->taskName = strdup(command); // copy the name of the command
-        new->start = start; // i wonder if this will work since it is NOT a memory address
         return new;
     }
 
@@ -51,7 +50,6 @@ struct Process *insert(struct Process *tasks, int pid, char *command, struct tim
     struct Process *new = create_process();
     new->pid = pid;
     new->taskName = strdup(command);
-    new->start = start;
     curr->next = new;
 
     return tasks;
@@ -152,23 +150,23 @@ int contains(struct Process *tasks, int pid)
     return 0;
 }
 
-struct Process *update_end_time(struct Process *tasks, int pid, struct timeval end)
-{
+// struct Process *update_end_time(struct Process *tasks, int pid, struct timeval end)
+// {
 
-    struct Process *tmp = get(tasks, pid);
+//     struct Process *tmp = get(tasks, pid);
 
-    // process did not exist
-    if(tmp == NULL) {
-        return NULL;
-    }
+//     // process did not exist
+//     if(tmp == NULL) {
+//         return NULL;
+//     }
     
-    tmp->end = end;
+//     tmp->end = end;
 
-    // returning in case we want to calculate the data on that one item
-    // not sure if timeval should be a memory address or not
-    // I will have to ask chatgpt or professor during office hours
-    return tmp;
-}
+//     // returning in case we want to calculate the data on that one item
+//     // not sure if timeval should be a memory address or not
+//     // I will have to ask chatgpt or professor during office hours
+//     return tmp;
+// }
 
 int size(struct Process *bg_tasks)
 {

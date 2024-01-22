@@ -14,6 +14,7 @@ int handle_command(char** commands, struct Process* tasks);
 int handle_foreground(char **commands, struct Process *tasks);
 int handle_background(char **commands, struct Process *tasks);
 void calculate_resources(struct Process* task);
+int time_to_millis(long int seconds, long int usec);
 
 int shell() {
     char* buffer;
@@ -124,6 +125,9 @@ int handle_foreground(char** commands, struct Process * tasks) {
     struct timeval start, end;
     int returned_process;
 
+     // get the current time before the operation
+    gettimeofday(&start, NULL);
+
     if ((pid = fork()) < 0)
     {
         fprintf(stderr, "Fork error\n");
@@ -133,8 +137,6 @@ int handle_foreground(char** commands, struct Process * tasks) {
     {
         /* child process */
 
-        // get the current time before the operation
-        gettimeofday(&start, NULL);
 
         if (strcmp(commands[0], "cd") == 0)
         {
@@ -163,9 +165,6 @@ int handle_foreground(char** commands, struct Process * tasks) {
     else
     {
         // parent
-            if(!contains(tasks, pid)) {
-                tasks = insert(tasks, pid, commands[0]); // adding task to list of tasks --> might not be necessary for synchronous tasks
-            } 
             
             // printf("about to visualize\n");
             // visualize(tasks);
@@ -176,12 +175,27 @@ int handle_foreground(char** commands, struct Process * tasks) {
             waitpid(pid, NULL, 0); // waiting for our desired pid
             gettimeofday(&end, NULL);
 
-            update_end_time(tasks, pid, end);
+            // update_end_time(tasks, pid, end);
+            visualize(tasks);
+            long seconds = end.tv_sec - start.tv_sec;
+            long microseconds = end.tv_usec - start.tv_usec;
 
-            struct Process* curr = get(tasks, pid);
+            int elapsed = time_to_millis(seconds, microseconds);
 
-            calculate_resources(curr);
-            tasks = delete(tasks, pid); // removes given pid from linked list
+        struct rusage usage;
+        if (getrusage(RUSAGE_CHILDREN, &usage) == 0) {
+            printf("User CPU time (milliseconds): %d\n", time_to_millis(usage.ru_utime.tv_sec, usage.ru_utime.tv_usec));
+            printf("System CPU time (milliseconds): %d\n", time_to_millis(usage.ru_stime.tv_sec, usage.ru_stime.tv_usec));
+            printf("elapsed time (milliseconds): %d\n", elapsed);
+            printf("# times process was preempted involuntarily: %ld\n", usage.ru_nivcsw);
+            printf("# times process was preempted voluntarily: %ld\n", usage.ru_nvcsw);
+            printf("# of major page faults: %ld\n", usage.ru_majflt);
+            printf("# of minor page faults: %ld\n", usage.ru_minflt);
+            printf("max resident set size used: %ld\n", usage.ru_maxrss);
+        } else {
+            fprintf(stderr, "Could not get usage statistics\n");
+            exit(1);
+        }
             // printf("foreground task completed");
             // visualize(tasks);
             
@@ -208,10 +222,11 @@ int handle_background(char **commands, struct Process *tasks)
     else if (pid == 0)
     {
         handle_foreground(commands, tasks);
-        exit(0);
+        _exit(0);
+    } else {
+        tasks = insert(tasks, pid, commands[0]);
     }
     
-    insert(tasks, pid, commands[0]);
     return 0; // if you are the parent you just return back to the loop
 
 }
@@ -288,8 +303,24 @@ void print_command(char** commands) {
     }
     printf("\n");
 }
+/**
+ * @brief calculates the number of milliseconds elapsed based ont he timeval
+ * 
+ * @param tv_sec number of whole seconds of elapsed time
+ * @param tv_usec number of microseconds elapsed
+ * @return int number of milliseconds elapsed
+ */
+
+int time_to_millis(long int seconds, long int usec) {
+    
+    /* TODO link math library to use ceil for time calculations */
+    int result = (seconds * 1000) + (int)((float)usec / 1000.0); // implicit conversion to milliseconds
+
+    return result;
+}
 
 void calculate_resources(struct Process* task) {
+
     
 }
 
