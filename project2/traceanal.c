@@ -40,7 +40,3 @@ int main() {
 
     return 0;
 }
-
-// split the string by '(' and then disregard the second half
-// if there is no '(' then it will return NULL
-
