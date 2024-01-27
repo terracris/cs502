@@ -3,42 +3,6 @@
 #include <string.h>
 #include "hashtable.h"
 
-// int main() {
-//     // so the variable myTable is a Hashtable stored on the stack,
-//     // the entries of the table (key-value pairs) are stored on the
-//     // heap. so they manually need to be destroyed
-//     HashTable myTable;
-
-
-//     // calling &myTable gives a pointer to a hash table on the stack
-//     // &mytable is still just like any other pointer
-//     // therefore we are able to change the values in place
-//     // i want to try this with my linkedlist implementation
-//     // and see if I could improve it. 
-//     initHashTable(&myTable);
-
-//     const char* key1 = "apple";
-//     const char* key2 = "banana";
-//     const char* key3 = "orange";
-
-//     // typically you should always pass complex values
-//     // by reference rather than value
-
-//     for(int i = 0; i < 5; i++) {
-//         if(contains(&myTable, key1)) {
-//             unsigned int updated_count = get(&myTable, key1) + 1;
-//             insert(&myTable, key1, updated_count);
-//         }  else {
-//             insert(&myTable, key1, 1);
-//         }
-//     }
-
-//     printf("Value for 'apple': %d\n", get(&myTable, key1));
-//     freeHashTable(&myTable);
-
-//     return 0;
-// }
-
 // Hash function to generate an index from the key
 unsigned int hash(const char* key) {
     unsigned int hash_value = 0;
@@ -119,4 +83,10 @@ void visualize(HashTable* ht) {
             printf("%d\n", ht->table[i]->value);
         }
     }
+}
+
+KeyValuePair * getPair(HashTable* ht, char *key) {
+    int index = hash(key);
+
+    return ht->table[index];
 }
