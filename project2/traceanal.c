@@ -26,7 +26,6 @@ int main() {
             char* currentKey = strtok(buffer, "(");
             
             if (previousKey != NULL) {
-
                 insert(&myTable, previousKey, currentKey);
                 previousKey = strcpy(previousKey, currentKey);
                 
