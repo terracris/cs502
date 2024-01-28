@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 #include "hashtable.h"
+
+#define MAX_SYSTEM_CALL_NAME_LENGTH 100
 
 int main() {
     char buffer[1024]; // Adjust the buffer size as needed
@@ -9,7 +12,6 @@ int main() {
     int total_calls = 0;
     int unique_calls = 0;
     char *previousKey = NULL;
-    KeyValuePair* prev = NULL;
 
 
     // Read input from stdin
@@ -21,28 +23,34 @@ int main() {
         if(strchr(buffer, '(') != NULL) {
             
             // only then can we process it
-            char* key = strtok(buffer, "(");
-            if(contains(&myTable, key)) {
-                unsigned int updated_count = get(&myTable, key) + 1;
-                insert(&myTable, key, updated_count);
+            char* currentKey = strtok(buffer, "(");
+            
+            if (previousKey != NULL) {
 
-                if(previousKey != NULL) {
-                    insert(prev->sequential, key, get(prev->sequential, key) + 1) 
-                }
-         }  else {
-                insert(&myTable, key, 1);
+                insert(&myTable, previousKey, currentKey);
+                previousKey = strcpy(previousKey, currentKey);
+                
+            } else {
+                previousKey = (char *) malloc(sizeof(char) * MAX_SYSTEM_CALL_NAME_LENGTH);
+                previousKey = strcpy(previousKey, currentKey);
+            }
+
+            if(!contains(&myTable, currentKey)) {
                 unique_calls++;
-         }
+            }
+            
 
          total_calls++;
-         prev = getPair(&myTable, key);
 
         } 
-        
     }
+
+    // need to insert the last item
+    insert(&myTable, previousKey, NULL);
     printf("AAA: %d invoked system call instances from %d unique system calls.\n", total_calls, unique_calls);
     visualize(&myTable);
     freeHashTable(&myTable);
+    free(previousKey);
 
     return 0;
 }
