@@ -25,7 +25,6 @@ typedef struct {
 unsigned int hash(const char* key);
 void initHashTable(HashTable* ht);
 void insert(HashTable* ht, const char* key, const char* subsequent);
-int get(HashTable* ht, const char* key);
 int contains(HashTable* ht, const char* key);
 void freeHashTable(HashTable* ht);
 void visualize(HashTable* ht);

@@ -39,13 +39,37 @@ void initHashTable(HashTable* ht) {
       variable, I would not have had this problem.  */
 void insert(HashTable* ht, const char* key, const char* subsequent) {
     unsigned int index = hash(key);
+    unsigned int starting_index = index;
     KeyValuePair* current = ht->table[index];
 
     // if the value already exists in the hashtable just increment the value
-    if(current != NULL) {
-        current->value++;
-        add_sequential(current, subsequent);
-        return;
+    // I am very proud to say that I have figured out my bug with my program.
+    // hashing is not perfect. Sometimes keys hash to the same hash as another key already exisiting 
+    // in the hash table. therefore, you must check for string equality. if not, we should looking
+    // for the next existing location. 
+    
+    // linear probing we learned in algorithms. look for the next available spot 
+    // --> what is the end condition for probing symbol 
+    
+    // we keep track of the starting index, increment and modulo until
+    // we get back to the starting index. if that is the case, we know our value does not exist
+    while(current != NULL)  {
+        // if current becomes NULL, we do have space for it given at index
+        if(strcmp(current->key, key) == 0) {
+            current->value++;
+            add_sequential(current, subsequent);
+            return;
+        }
+
+        index++;
+        index = index % TABLE_SIZE;
+        current = ht->table[index];
+
+        if(index == starting_index) {
+            printf("No more room in table");
+            return;
+        }
+        
     }
 
     // Create a new key-value pair --> calling malloc bc we want the
@@ -59,22 +83,6 @@ void insert(HashTable* ht, const char* key, const char* subsequent) {
 
     // insert the pair into the hash table
     ht->table[index] = new_pair;
-}
-
-// Function to retrieve the value associated with a key
-int get(HashTable* ht, const char* key) {
-    unsigned int index = hash(key);
-
-    // Retrieve the pair from the hash table
-    KeyValuePair* pair = ht->table[index];
-
-    // Check if the key exists in the hash table
-    if(pair != NULL && strcmp(pair->key, key) == 0) {
-        return pair->value;
-    }
-
-    // Key not found
-    return -1;
 }
 
 Sequential * create_sequential(const char* call) {
@@ -139,8 +147,27 @@ void visualize_sequential(KeyValuePair* current) {
 int contains(HashTable* ht, const char* key) {
 
     int index = hash(key);
+    int starting_index = index;
+    KeyValuePair* pair = ht->table[index];
 
-    return ht->table[index] != NULL;
+    // looking for the value
+    while(pair != NULL) {
+        if(strcmp(pair->key, key) == 0) {
+            return 1;
+        }
+
+        index++;
+        index = index % TABLE_SIZE; // allows for looping around searching for the next available spot
+        pair = ht->table[index];
+
+        if(index == starting_index) {
+            return 0;
+        }
+    }
+
+    // if their is a gap in the values while probing, the value must not exist
+
+    return 0;
 
 }
 
@@ -178,10 +205,4 @@ void visualize(HashTable* ht) {
             visualize_sequential(ht->table[i]);
         }
     }
-}
-
-KeyValuePair * getPair(HashTable* ht, char *key) {
-    int index = hash(key);
-
-    return ht->table[index];
 }

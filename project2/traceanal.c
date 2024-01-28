@@ -36,6 +36,7 @@ int main() {
 
             if(!contains(&myTable, currentKey)) {
                 unique_calls++;
+                printf("%s\n", currentKey);
             }
             
 

@@ -1,4 +1,27 @@
-AAA: 143 invoked system call instances from 19 unique system calls.
+execve
+brk
+arch_prctl
+access
+openat
+stat
+fstat
+mmap
+close
+read
+mprotect
+pread64
+munmap
+set_tid_address
+set_robust_list
+rt_sigaction
+rt_sigprocmask
+prlimit64
+statfs
+ioctl
+getdents64
+write
+exit_group
+AAA: 143 invoked system call instances from 23 unique system calls.
 close 11
 close:openat 4
 close:openat 1
@@ -33,22 +56,25 @@ openat:openat 7
 openat:openat 1
 set_tid_address 1
 set_tid_address:set_robust_list 1
-arch_prctl 10
+arch_prctl 2
 arch_prctl:access 1
-arch_prctl:pread64 3
-arch_prctl:pread64 1
-arch_prctl:fstat 2
-arch_prctl:mmap 1
-arch_prctl:mmap 1
 arch_prctl:mprotect 1
+pread64 8
+pread64:pread64 3
+pread64:pread64 1
+pread64:fstat 2
+pread64:mmap 1
+pread64:mmap 1
 brk 3
 brk:arch_prctl 1
 brk:brk 1
 brk:openat 1
-stat 18
-stat:openat 16
+stat 16
+stat:openat 15
 stat:openat 1
-stat:ioctl 1
+ioctl 2
+ioctl:ioctl 1
+ioctl:openat 1
 mmap 27
 mmap:close 7
 mmap:mmap 18
@@ -56,10 +82,11 @@ mmap:mprotect 1
 mmap:arch_prctl 1
 prlimit64 1
 prlimit64:statfs 1
-rt_sigprocmask 3
+rt_sigprocmask 1
 rt_sigprocmask:prlimit64 1
-rt_sigprocmask:statfs 1
-rt_sigprocmask:brk 1
+statfs 2
+statfs:statfs 1
+statfs:brk 1
 execve 1
 execve:brk 1
 rt_sigaction 2
@@ -68,15 +95,16 @@ rt_sigaction:rt_sigprocmask 1
 access 2
 access:openat 1
 access:openat 1
-read 15
+read 7
 read:fstat 3
-read:mmap 1
 read:pread64 1
 read:pread64 1
-read:mprotect 5
-read:mprotect 1
-read:munmap 1
 read:read 1
 read:close 1
+mprotect 8
+mprotect:mmap 1
+mprotect:mprotect 5
+mprotect:mprotect 1
+mprotect:munmap 1
 munmap 1
 munmap:set_tid_address 1
