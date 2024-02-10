@@ -197,12 +197,13 @@ void free_subsequent_calls(KeyValuePair* pair) {
 
 }
 
-void visualize(HashTable* ht) {
+void visualize(HashTable* ht, int seq) {
     for(int i = 0; i < TABLE_SIZE; i++) {
         if(ht->table[i] != NULL) {
             printf("%s ", ht->table[i]->key);
             printf("%d\n", ht->table[i]->value);
-            visualize_sequential(ht->table[i]);
+            if (seq)
+                visualize_sequential(ht->table[i]);
         }
     }
 }

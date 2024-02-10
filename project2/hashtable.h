@@ -27,7 +27,7 @@ void initHashTable(HashTable* ht);
 void insert(HashTable* ht, const char* key, const char* subsequent);
 int contains(HashTable* ht, const char* key);
 void freeHashTable(HashTable* ht);
-void visualize(HashTable* ht);
+void visualize(HashTable* ht, int seq);
 Sequential * create_sequential(const char* call);
 void add_sequential(KeyValuePair* current, const char* call);
 void visualize_sequential(KeyValuePair* current);

@@ -5,13 +5,18 @@
 
 #define MAX_SYSTEM_CALL_NAME_LENGTH 100
 
-int main() {
+int main(int argc, char** argv) {
     char buffer[1024]; // Adjust the buffer size as needed
     HashTable myTable;
     initHashTable(&myTable);
     int total_calls = 0;
     int unique_calls = 0;
     char *previousKey = NULL;
+    int seq = 0;
+
+    if (argc > 1 && (strcmp(argv[1], "seq") == 0)) {
+        seq = 1; // if we have more than the program being called, then we print the rest
+    }
 
 
     // Read input from stdin
@@ -36,7 +41,6 @@ int main() {
 
             if(!contains(&myTable, currentKey)) {
                 unique_calls++;
-                printf("%s\n", currentKey);
             }
             
 
@@ -48,7 +52,7 @@ int main() {
     // need to insert the last item
     insert(&myTable, previousKey, NULL);
     printf("AAA: %d invoked system call instances from %d unique system calls.\n", total_calls, unique_calls);
-    visualize(&myTable);
+    visualize(&myTable, seq);
     freeHashTable(&myTable);
     free(previousKey);
 
