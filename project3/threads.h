@@ -15,8 +15,9 @@ struct msg {
 };
 
 void SendMsg(int iTo, struct msg *pMsg);
-void RecvMsg(int iRecv, struct msg *pMsg);
-void adder(struct msg * tracker, int val);
+struct msg* RecvMsg(int iRecv, struct msg *pMsg);
+void adder(struct msg * tracker, struct msg * new_msg);
 void * communicate(void* arg);
+void terminateMsgs(int thread_count);
 
 #endif
