@@ -16,5 +16,7 @@ struct msg {
 
 void SendMsg(int iTo, struct msg *pMsg);
 void RecvMsg(int iRecv, struct msg *pMsg);
+void adder(struct msg * tracker, int val);
+void * communicate(void* arg);
 
 #endif
