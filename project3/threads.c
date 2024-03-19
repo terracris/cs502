@@ -14,10 +14,22 @@ pthread_t threads[MAX_THREADS];  /* threads */
 void initMailbox(sem_t *mailbox, int thread_count, int init_count);
 void destroyMailbox(sem_t *mailbox, int thread_count);
 
+int enableNB = 0;
+
 #define MAIN_THREAD_MAILBOX 0
 
 int main(int argc, char** argv) {
 
+    if ( argc > 2 && strcmp(argv[2], "nb") == 0) {
+        enableNB = 1;
+    }
+
+    // creating a queue in c --> start and end of queue, initially they point to the same thing
+    Queue* q = (Queue*) malloc(sizeof(Queue));
+    q->front = NULL;
+    q->rear = NULL;
+
+    
     int thread_count = atoi(argv[1]);
     
     if(thread_count > MAX_THREADS) {
@@ -45,15 +57,61 @@ int main(int argc, char** argv) {
     while(fgets(buffer, buffer_size, stdin)) {
 
         // could simply split the message by space, but this works as well
+        if (strlen(buffer) <= 2) {
+            // if a line contains less than two items we assume it is the end of file
+            // since we have the whitespace character, the length must be equal to two
+            break;
+        }
         int msg_val = atoi(strtok(buffer, " "));
         int recipient = atoi(strtok(NULL, " "));
+
+        if(recipient < 0 || recipient > thread_count) {
+            printf("%d is an invalid mailbox\n", recipient);
+            continue;
+        }
+
+        if(msg_val < 0) {
+            printf("%d is an invalid message value\n", msg_val);
+            continue;
+        }
+
         printf("to: %d, value: %d\n", recipient, msg_val);
         struct msg* msg = (struct msg*) malloc(sizeof(struct msg)); // create a message to send to a thread
         msg->iFrom = 0; // message coming from main thread
         msg->value = msg_val;
-        SendMsg(recipient, msg);
+        
+        if (enableNB) {
 
-        // should I check the main message mailbox frequently?
+            if(SendMsgNB(recipient, msg) == -1) {
+                // don't block, add to the queue
+                enqueue(q, recipient, msg);
+            }
+        } else {
+
+            SendMsg(recipient, msg);
+        }
+
+    }
+
+    // when end of file is received, it should try to send all queued messages
+    if (enableNB) {
+        printf("Here is what the queue looks like right now\n");
+        visualize_queue(q);
+    }
+
+    // as soon as all messages are sent we are all good to get
+    while(!isEmpty(q)) {
+        Node * temp = dequeue(q);
+        int recipient = temp->recipient;
+        struct msg* msg = temp->msg;
+
+        // if SendMsgNB is successful we still need to free temp
+        if(SendMsgNB(recipient, msg) == -1) {
+            enqueue(q, recipient, msg);
+        }
+
+        free(temp); // I wonder if this also frees the msg pointer. (i do not think it does)
+
     }
 
         // send termination message to all threads and wait for them. then exit.
@@ -65,6 +123,75 @@ int main(int argc, char** argv) {
     destroyMailbox(mailbox_sem_consumers, thread_count);
 
     return 0;
+}
+
+void enqueue(Queue* q, int recipient, struct msg* msg) {
+    
+    Node* newNode = (Node *) malloc(sizeof(Node));
+    newNode->recipient = recipient;
+    newNode->msg = msg;
+    newNode->next = NULL;
+
+    if(isEmpty(q)) {
+        q->front = newNode;
+        q->rear = newNode;
+    } else {
+        q->rear->next = newNode;
+        q->rear = newNode;
+    }
+}
+
+int isEmpty(Queue* q) {
+    return (q->front == NULL);
+}
+
+Node* dequeue(Queue* q) {
+
+    if(isEmpty(q)) {
+        printf("Queue is empty\n");
+        return NULL;
+    }
+
+    Node * temp = q->front;
+    q->front = q->front->next;
+
+    if(q->front == NULL) {
+        q->rear = NULL;
+    }
+
+    return temp;
+
+}
+
+void visualize_queue(Queue* q) {
+
+    Node * temp = q->front;
+
+    while(temp != NULL) {
+        printf("%d -> ", temp->recipient);
+        temp = temp->next;
+    }
+
+    printf("\n");
+}
+
+int SendMsgNB(int iTo, struct msg *pMsg) {
+    // decrement producer semaphore
+    // if err_num = -1, it is currently full. we return and do not block
+    int err_num = sem_trywait(&mailbox_sem_producers[iTo]);
+    
+    if(err_num == -1) {
+        return -1;
+    }
+
+    // if it is not full, then we can proceed
+    mailbox[iTo] = pMsg; // placing message in mailbox
+    sem_post(&mailbox_sem_consumers[iTo]); // increment the consumer counter to now consume message
+    printf("placed it in mailbox: %d\n", iTo);
+    printf("----------------------------\n");
+
+    return 0; // success
+
 }
 
 /**
@@ -173,6 +300,10 @@ void * communicate(void* arg) {
 
 void terminateMsgs(int thread_count) {
 
+    // creating a queue in c --> start and end of queue, initially they point to the same thing
+    Queue* q = (Queue*) malloc(sizeof(Queue));
+    q->front = NULL;
+    q->rear = NULL;
    
     struct msg *new_msg = NULL;
     int mailbox_number = 0;
@@ -180,10 +311,36 @@ void terminateMsgs(int thread_count) {
     
     // send all thread mailbox a negative 1 message
     for(int i = 1; i < thread_count + 1; i++) {
-         struct msg* termination_msg = (struct msg *) malloc(sizeof(struct msg));
+        struct msg* termination_msg = (struct msg *) malloc(sizeof(struct msg));
         termination_msg->iFrom = 0; // coming from main thread
         termination_msg->value = -1;
-        SendMsg(i, termination_msg);
+
+         if (enableNB) {
+
+            if(SendMsgNB(i, termination_msg) == -1) {
+                // don't block, add to the queue
+                enqueue(q, i, termination_msg);
+            }
+        } else {
+
+            SendMsg(i, termination_msg);
+        }
+
+    }
+
+    // send to any ones we were not able to send to
+    while(!isEmpty(q)) {
+        Node * temp = dequeue(q);
+        int recipient = temp->recipient;
+        struct msg* msg = temp->msg;
+
+        // if SendMsgNB is successful we still need to free temp
+        if(SendMsgNB(recipient, msg) == -1) {
+            enqueue(q, recipient, msg);
+        }
+
+        free(temp); // I wonder if this also frees the msg pointer. (i do not think it does)
+
     }
 
     while((new_msg = RecvMsg(mailbox_number, new_msg)) != NULL) {
