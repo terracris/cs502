@@ -10,4 +10,7 @@ struct vbentry {
     int tDep;  /* time of departure from room */
 };
 
+
+int get_completion_time(int last_room_visited, int rat_id);
+
 #endif
