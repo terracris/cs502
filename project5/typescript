@@ -1,0 +1,96 @@
+Script started on 2024-03-24 13:49:12-04:00 [TERM="xterm-256color" TTY="/dev/pts/1" COLUMNS="122" LINES="32"]
+ _________________________
+/ Questionable day.       \
+|                         |
+\ Ask somebody something. /
+ -------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+]0;cristobal@cristobal: ~/cs/cs502/project5[01;32mcristobal@cristobal[00m:[01;34m~/cs/cs502/project5[00m$ ./maze 3 i
+you are using inorder traversal
+creating 3 rats
+room 0: capacity = 3, duration = 1
+room 1: capacity = 2, duration = 2
+room 2: capacity = 1, duration = 2
+total rooms: 3
+Rat 0 running!
+Rat 1 running!
+Rat 2 running!
+Rat 1 exited maze
+Rat 1 completed maze in 5 seconds.
+Rat 0 exited maze
+Rat 0 completed maze in 7 seconds.
+Rat 2 exited maze
+Rat 2 completed maze in 9 seconds.
+Total traversal time: 21 seconds, compared to ideal time: 15 seconds.
+]0;cristobal@cristobal: ~/cs/cs502/project5[01;32mcristobal@cristobal[00m:[01;34m~/cs/cs502/project5[00m$ ./maze 3 d
+you are using distributed traversal
+creating 3 rats
+room 0: capacity = 3, duration = 1
+room 1: capacity = 2, duration = 2
+room 2: capacity = 1, duration = 2
+total rooms: 3
+Rat 1 running!
+Rat 2 running!
+Rat 0 running!
+Rat 2 exited maze
+Rat 2 completed maze in 5 seconds.
+Rat 1 exited maze
+Rat 1 completed maze in 5 seconds.
+Rat 0 exited maze
+Rat 0 completed maze in 6 seconds.
+Total traversal time: 16 seconds, compared to ideal time: 15 seconds.
+]0;cristobal@cristobal: ~/cs/cs502/project5[01;32mcristobal@cristobal[00m:[01;34m~/cs/cs502/project5[00m$ ./,a[K[Kmaze 67[K d
+you are using distributed traversal
+You are trying to create too many rats.
+: Success
+]0;cristobal@cristobal: ~/cs/cs502/project5[01;32mcristobal@cristobal[00m:[01;34m~/cs/cs502/project5[00m$ ./maze 6 d[Kq
+Invalid algorithm passed in.
+: Success
+]0;cristobal@cristobal: ~/cs/cs502/project5[01;32mcristobal@cristobal[00m:[01;34m~/cs/cs502/project5[00m$ ./maze 6 q[K[K[K4 i
+you are using inorder traversal
+creating 4 rats
+room 0: capacity = 3, duration = 1
+room 1: capacity = 2, duration = 2
+room 2: capacity = 1, duration = 2
+total rooms: 3
+Rat 1 running!
+Rat 2 running!
+Rat 3 running!
+Rat 0 running!
+Rat 2 exited maze
+Rat 2 completed maze in 5 seconds.
+Rat 0 exited maze
+Rat 0 completed maze in 7 seconds.
+Rat 1 exited maze
+Rat 1 completed maze in 9 seconds.
+Rat 3 exited maze
+Rat 3 completed maze in 11 seconds.
+Total traversal time: 32 seconds, compared to ideal time: 20 seconds.
+]0;cristobal@cristobal: ~/cs/cs502/project5[01;32mcristobal@cristobal[00m:[01;34m~/cs/cs502/project5[00m$ ./maze 4 i[Kd
+you are using distributed traversal
+creating 4 rats
+room 0: capacity = 3, duration = 1
+room 1: capacity = 2, duration = 2
+room 2: capacity = 1, duration = 2
+total rooms: 3
+Rat 2 running!
+Rat 3 running!
+Rat 1 running!
+Rat 0 running!
+Rat 2 exited maze
+Rat 2 completed maze in 5 seconds.
+Rat 1 exited maze
+Rat 1 completed maze in 5 seconds.
+Rat 0 exited maze
+Rat 0 completed maze in 6 seconds.
+Rat 3 exited maze
+Rat 3 completed maze in 8 seconds.
+Total traversal time: 24 seconds, compared to ideal time: 20 seconds.
+]0;cristobal@cristobal: ~/cs/cs502/project5[01;32mcristobal@cristobal[00m:[01;34m~/cs/cs502/project5[00m$ exit
+exit
+
+Script done on 2024-03-24 13:51:02-04:00 [COMMAND_EXIT_CODE="0"]
