@@ -17,7 +17,9 @@
 
 int four_or_greater = 0;
 int max_len = 0;
-int thread_count = 0;
+int thread_count = 1;  // default number is one thread!
+int partial_flag = 0;  // default not engaged
+int partial_word_len = 0;
 
 pthread_t threads[MAX_THREADS];
 struct word words[MAX_THREADS][MAX_WORDS];
@@ -27,19 +29,15 @@ struct thread_args args[MAX_THREADS];
 
 int main(int argc, char *argv[])
 {
-    int read_flag = 0;
+    int read_flag = 1; // default is to read
     int memory_mapped = 0;
-    int read_size;
+    int read_size = DEFAULT_BUFSIZE;  // default read size unless specified
 
     if (argc < 2 || argc > 4)
     {
         printf("Invalid number of arguments\n");
         exit(1);
     }
-
-    read_flag = 1;
-    read_size = DEFAULT_BUFSIZE;
-    const char *filename = argv[1];
 
     if (argc >= 3)
     {
@@ -60,6 +58,8 @@ int main(int argc, char *argv[])
         thread_count = extract_number(argv[3]);
         printf("%d threads\n", thread_count);
     }
+
+    const char *filename = argv[1];
 
     if (read_flag)
     {
@@ -95,8 +95,17 @@ void read_file(int read_size, const char *filename, int thread_count)
     }
 
     printf("File size: %d\n", file_size);
-    printf("Strings of at least length 4: %d\n", four_or_greater);
-    printf("Maximum string length: %d\n", max_len);
+    
+    if(partial_word_len > max_len) {
+        printf("Maximum string length: %d\n", partial_word_len);
+        four_or_greater++;
+        printf("Strings of at least length 4: %d\n", four_or_greater);
+
+    } else {
+        printf("Maximum string length: %d\n", max_len);
+        printf("Strings of at least length 4: %d\n", four_or_greater);
+
+    }
 
     if (fdIn > 0)
     {
@@ -115,7 +124,8 @@ void * process(void * arg) {
     int word_count = 0;
 
     for(int i = start; i < end; i++) {
-    char current_byte = buf[i];
+        char current_byte = buf[i];
+        
             if (isprint(current_byte) || isspace(current_byte))
             {
             // if it is a printable character, we must increase the count of bytes read
@@ -136,7 +146,11 @@ void * process(void * arg) {
         // we have a partial word
         words[thread_id][word_count].length = curr_string_len;
         words[thread_id][word_count].is_partial = 1;
+        word_count++;
+        printf("current strn len: %d\n",curr_string_len);
     }
+
+    words_per_thread[thread_id] = word_count;
     
 }
 
@@ -144,10 +158,11 @@ void threadify(int bytes_read, int thread_count, char * buf) {
     // now make the threads
     
     // define the chunk size by the number of bytes read
-    int chunk_size = bytes_read / thread_count;
+    int chunk_size = bytes_read / thread_count; // even if its one thread reading everything
+    int remainder = bytes_read - (thread_count * chunk_size);
 
     int start = 0;
-    int end = chunk_size;
+    int end = chunk_size + remainder;
 
     for(int i = 0; i < thread_count; i++) {
         args[i].id = i;
@@ -180,6 +195,9 @@ void combine() {
             int word_len;
 
             word_len = curr_word.length; // DEFAULT CASE
+            printf("word length: %d\n", word_len);
+            //printf("is partial: %d\n", curr_word.is_partial);
+
 
             // handle partials first
             if(partial_flag && !curr_word.is_partial) {
@@ -200,6 +218,7 @@ void combine() {
 
                 partial_flag = 1; 
                 partial_word_len = curr_word.length;
+                printf("here!!\n");
                 break; // no need to keep looking!
             }
 
