@@ -1,0 +1,76 @@
+Script started on 2024-01-22 17:55:32-05:00 [TERM="xterm-256color" TTY="/dev/pts/2" COLUMNS="122" LINES="39"]
+==>date
+Mon 22 Jan 2024 05:55:34 PM EST
+User CPU time (milliseconds): 4
+System CPU time (milliseconds): 0
+elapsed time (milliseconds): 2
+# times process was preempted involuntarily: 0
+# times process was preempted voluntarily: 2
+# of major page faults: 0
+# of minor page faults: 202
+max resident set size used: 3236
+==>ls
+class  doit  doit.c  doit.o  foo.txt  makefile	process.c  process.h  process.o  proj1.txt  shell.c  shell.h  shell.o
+User CPU time (milliseconds): 4
+System CPU time (milliseconds): 0
+elapsed time (milliseconds): 2
+# times process was preempted involuntarily: 17
+# times process was preempted voluntarily: 4
+# of major page faults: 0
+# of minor page faults: 208
+max resident set size used: 3236
+==>pwd
+/home/cristobal/cs/cs502/project1/c
+User CPU time (milliseconds): 4
+System CPU time (milliseconds): 0
+elapsed time (milliseconds): 2
+# times process was preempted involuntarily: 17
+# times process was preempted voluntarily: 6
+# of major page faults: 0
+# of minor page faults: 214
+max resident set size used: 3236
+==>cd . /home/cristobal/cs/cs502/project1
+Current directory is changed to /home/cristobal/cs/cs502/project1
+User CPU time (milliseconds): 4
+System CPU time (milliseconds): 0
+elapsed time (milliseconds): 0
+# times process was preempted involuntarily: 29
+# times process was preempted voluntarily: 8
+# of major page faults: 0
+# of minor page faults: 220
+max resident set size used: 3236
+==>ls
+class  doit  doit.c  doit.o  foo.txt  makefile	process.c  process.h  process.o  proj1.txt  shell.c  shell.h  shell.o
+User CPU time (milliseconds): 4
+System CPU time (milliseconds): 1
+elapsed time (milliseconds): 3
+# times process was preempted involuntarily: 29
+# times process was preempted voluntarily: 10
+# of major page faults: 0
+# of minor page faults: 226
+max resident set size used: 3236
+==>cd    sleep 5 &
+[1] pid: 13760 (sleep)
+==>jobs
+[1] pid: 13760 (sleep)
+==>wc foo.txt
+Process 13760 completed.
+  5  28 161 foo.txt
+User CPU time (milliseconds): 4
+System CPU time (milliseconds): 2
+elapsed time (milliseconds): 1
+# times process was preempted involuntarily: 29
+# times process was preempted voluntarily: 14
+# of major page faults: 0
+# of minor page faults: 242
+max resident set size used: 3236
+==>sleep 5 &
+[1] pid: 13917 (sleep)
+==>exit
+Waiting for background processes to finish...
+[1] pid: 13917 (sleep)
+
+Background process (PID: 13917) completed.
+All background processes have finished.
+
+Script done on 2024-01-22 17:56:41-05:00 [COMMAND_EXIT_CODE="0"]

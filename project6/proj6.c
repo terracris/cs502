@@ -9,6 +9,7 @@
 #include <string.h>
 #include <pthread.h>
 #include "proj6.h"
+
 #define DEFAULT_BUFSIZE 1024
 #define MAX_READ_SIZE 8192
 #define MAX_THREADS 16
@@ -16,42 +17,32 @@
 
 int four_or_greater = 0;
 int max_len = 0;
-int chunk_size;
 int thread_count = 0;
-int partial_flag = 0;
-int partial_word_len = 0;
 
 pthread_t threads[MAX_THREADS];
 struct word words[MAX_THREADS][MAX_WORDS];
-int words_per_thread[MAX_THREADS]; // store the number of words each thread found
+int words_per_thread[MAX_THREADS];
 struct thread_args args[MAX_THREADS];
 
 
 int main(int argc, char *argv[])
 {
-    
     int read_flag = 0;
     int memory_mapped = 0;
     int read_size;
 
-
-    // Check if the number of arguments is valid
     if (argc < 2 || argc > 4)
     {
         printf("Invalid number of arguments\n");
         exit(1);
     }
 
-    // Default values
     read_flag = 1;
     read_size = DEFAULT_BUFSIZE;
-    const char * filename = argv[1];
+    const char *filename = argv[1];
 
-
-    // Parse arguments
     if (argc >= 3)
     {
-        // Check if memory mapping is requested
         if (strcmp(argv[2], "mmap") == 0)
         {
             printf("Using memory mapping\n");
@@ -59,13 +50,11 @@ int main(int argc, char *argv[])
         }
         else
         {
-            // Parse read size
             read_size = atoi(argv[2]);
             validate_readsize(read_size);
         }
     }
 
-    // Parse number of threads if provided
     if (argc == 4)
     {
         thread_count = extract_number(argv[3]);
@@ -75,31 +64,31 @@ int main(int argc, char *argv[])
     if (read_flag)
     {
         read_file(read_size, filename, thread_count);
-    }    
+    }
 
-    if(memory_mapped) {
+    if (memory_mapped)
+    {
         memory_map_file(filename, thread_count);
     }
+
+    return 0;
 }
 
-
-void read_file(int read_size, char * filename, int thread_count) {
+void read_file(int read_size, const char *filename, int thread_count)
+{
     int fdIn, cnt, i;
     char buf[read_size];
-    
+
     if ((fdIn = open(filename, O_RDONLY)) < 0)
     {
-        fprintf(stderr, "could not open file\n");
+        perror("could not open file");
         exit(1);
     }
 
-    // now that we have opened the file, we are all set to read from it
     int file_size = 0;
 
     while ((cnt = read(fdIn, buf, read_size)) > 0)
     {
-        // now that we have read, we need to look at every byte that we read
-        // we need to determine if it is a printable character
         threadify(cnt, thread_count, buf);
         combine();
         file_size += cnt;
@@ -110,8 +99,9 @@ void read_file(int read_size, char * filename, int thread_count) {
     printf("Maximum string length: %d\n", max_len);
 
     if (fdIn > 0)
+    {
         close(fdIn);
-    
+    }
 }
 
 void * process(void * arg) {
