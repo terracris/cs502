@@ -1,0 +1,2731 @@
+ELF
+word found: 3
+>
+word found: 1
+@
+word found: 1
+@
+word found: 1
+>
+word found: 1
+@
+word found: 1
+8
+word found: 1
+
+word found: 1
+@
+word found: 1
+@
+word found: 1
+@
+word found: 1
+@
+word found: 1
+	
+word found: 1
+	
+word found: 1
+ 
+word found: 1
+ 
+word found: 1
+ 
+word found: 1
+0-
+word found: 2
+0=
+word found: 2
+0=
+word found: 2
+P
+word found: 1
+@-
+word found: 2
+@=
+word found: 2
+@=
+word found: 2
+8
+word found: 1
+8
+word found: 1
+8
+word found: 1
+ 
+word found: 1
+ 
+word found: 1
+X
+word found: 1
+X
+word found: 1
+X
+word found: 1
+D
+word found: 1
+D
+word found: 1
+S
+word found: 1
+td
+word found: 2
+8
+word found: 1
+8
+word found: 1
+8
+word found: 1
+ 
+word found: 1
+ 
+word found: 1
+P
+word found: 1
+td
+word found: 2
+p!
+word found: 2
+p!
+word found: 2
+p!
+word found: 2
+Q
+word found: 1
+td
+word found: 2
+R
+word found: 1
+td
+word found: 2
+0-
+word found: 2
+0=
+word found: 2
+0=
+word found: 2
+/lib64/ld-linux-x86-64.so.2
+word found: 27
+GNU
+word found: 3
+GNU
+word found: 3
+\
+word found: 1
+d2(j
+word found: 4
+k
+word found: 1
+-
+word found: 1
+-
+word found: 1
+GNU
+word found: 3
+e
+word found: 1
+m
+word found: 1
+Z
+word found: 1
+word length: 3
+ 
+word found: 1
+G
+word found: 1
+i
+word found: 1
+ 
+word found: 1
+n
+word found: 1
+M
+word found: 1
+}
+word found: 1
+-
+word found: 1
+ 
+word found: 1
+"
+word found: 1
+libpthread.so.0
+word found: 15
+_ITM_deregisterTMCloneTable
+word found: 27
+_ITM_registerTMCloneTable
+word found: 25
+close
+word found: 5
+pthread_join
+word found: 12
+pthread_create
+word found: 14
+read
+word found: 4
+open
+word found: 4
+libc.so.6
+word found: 9
+exit
+word found: 4
+perror
+word found: 6
+puts
+word found: 4
+__stack_chk_fail
+word found: 16
+putchar
+word found: 7
+printf
+word found: 6
+mmap
+word found: 4
+__ctype_b_loc
+word found: 13
+atoi
+word found: 4
+__cxa_finalize
+word found: 14
+strcmp
+word found: 6
+__libc_start_main
+word found: 17
+__fxstat
+word found: 8
+GLIBC_2.2.5
+word found: 11
+GLIBC_2.3
+word found: 9
+GLIBC_2.4
+word found: 9
+__gmon_start__
+word found: 14
+ 
+word found: 1
+u
+word found: 1
+i	
+word found: 2
+s
+word found: 1
+ii
+word found: 3
+ii
+word found: 3
+
+word found: 1
+u
+word found: 1
+i	
+word found: 2
+0=
+word found: 2
+ 
+word found: 1
+8=
+word found: 2
+@
+word found: 1
+@
+word found: 1
+?
+word found: 1
+?
+word found: 1
+
+
+word found: 1
+word length: 1
+?
+word found: 1
+
+word found: 1
+?
+word found: 1
+?
+word found: 1
+X?
+word found: 2
+`?
+word found: 2
+h?
+word found: 2
+p?
+word found: 2
+x?
+word found: 2
+?
+word found: 1
+?
+word found: 1
+?
+word found: 1
+	
+word found: 1
+?
+word found: 1
+
+word found: 1
+?
+word found: 1
+
+word found: 1
+?
+word found: 1
+?
+word found: 1
+?
+word found: 1
+?
+word found: 1
+?
+word found: 1
+?
+word found: 1
+word length: 1
+H
+word found: 1
+H
+word found: 1
+/
+word found: 1
+H
+word found: 1
+t
+word found: 1
+H
+word found: 1
+5"/
+word found: 3
+%#/
+word found: 3
+h
+word found: 1
+h
+word found: 1
+h
+word found: 1
+h
+word found: 1
+h
+word found: 1
+h
+word found: 1
+h
+word found: 1
+h
+word found: 1
+q
+word found: 1
+h
+word found: 1
+a
+word found: 1
+h	
+word found: 2
+Q
+word found: 1
+h
+
+word found: 2
+A
+word found: 1
+h
+word found: 2
+1
+word found: 1
+h
+word found: 2
+!
+word found: 1
+h
+word found: 2
+h
+word found: 1
+h
+word found: 1
+%
+word found: 1
+.
+word found: 1
+D
+word found: 1
+%.
+word found: 3
+D
+word found: 1
+%
+word found: 1
+.
+word found: 1
+D
+word found: 1
+%
+word found: 1
+-
+word found: 1
+D
+word found: 1
+%
+word found: 1
+-
+word found: 1
+D
+word found: 1
+%
+word found: 1
+-
+word found: 1
+D
+word found: 1
+%
+word found: 1
+-
+word found: 1
+D
+word found: 1
+%
+word found: 1
+-
+word found: 1
+D
+word found: 1
+%
+word found: 1
+-
+word found: 1
+D
+word found: 1
+%
+word found: 1
+-
+word found: 1
+D
+word found: 1
+%
+word found: 1
+-
+word found: 1
+D
+word found: 1
+%
+word found: 1
+-
+word found: 1
+D
+word found: 1
+%
+word found: 1
+-
+word found: 1
+D
+word found: 1
+%
+word found: 1
+-
+word found: 1
+D
+word found: 1
+%
+word found: 1
+-
+word found: 1
+D
+word found: 1
+%
+word found: 1
+-
+word found: 1
+D
+word found: 1
+%
+word found: 1
+-
+word found: 1
+D
+word found: 1
+1
+word found: 1
+I
+word found: 1
+^H
+word found: 2
+H
+word found: 1
+PTL
+word found: 3
+
+word found: 1
+H
+word found: 1
+
+word found: 1
+
+word found: 1
+H
+word found: 1
+=
+word found: 1
+r-
+word found: 2
+H
+word found: 1
+=
+word found: 1
+-
+word found: 1
+H
+word found: 1
+-
+word found: 1
+H9
+word found: 2
+t
+word found: 1
+H
+word found: 1
+N-
+word found: 2
+H
+word found: 1
+t	
+word found: 2
+H
+word found: 1
+=q-
+word found: 3
+H
+word found: 1
+5j-
+word found: 3
+H)
+word found: 2
+H
+word found: 1
+H
+word found: 1
+?H
+word found: 2
+H
+word found: 1
+H
+word found: 1
+t
+word found: 1
+H
+word found: 1
+%-
+word found: 2
+H
+word found: 1
+t
+word found: 1
+f
+word found: 1
+D
+word found: 1
+=5-
+word found: 3
+u+UH
+word found: 4
+=
+word found: 1
+-
+word found: 1
+H
+word found: 1
+tH
+word found: 3
+=
+word found: 1
+-
+word found: 1
+)
+word found: 1
+d
+word found: 1
+-
+word found: 2
+]
+word found: 1
+w
+word found: 1
+UH
+word found: 2
+H
+word found: 1
+0
+word found: 1
+}
+word found: 1
+H
+word found: 1
+u
+word found: 1
+E
+word found: 1
+E
+word found: 1
+E
+word found: 1
+}
+word found: 1
+~
+word found: 1
+}
+word found: 1
+~
+word found: 1
+H
+word found: 1
+=
+word found: 1
+
+word found: 1
+}
+word found: 1
+~SH
+word found: 3
+E
+word found: 1
+H
+word found: 1
+H
+word found: 1
+H
+word found: 1
+5
+word found: 1
+
+word found: 1
+H
+word found: 1
+-
+word found: 1
+u
+word found: 1
+H
+word found: 1
+=
+word found: 1
+
+word found: 1
+E
+word found: 1
+ H
+word found: 2
+E
+word found: 1
+H
+word found: 1
+H
+word found: 1
+H
+word found: 1
+Q
+word found: 1
+E
+word found: 1
+E
+word found: 1
+
+
+word found: 1
+}
+word found: 1
+u2H
+word found: 3
+E
+word found: 1
+H
+word found: 1
+H
+word found: 1
+H
+word found: 1
+6
+
+word found: 2
+%,
+word found: 2
+,
+word found: 1
+H
+word found: 1
+=D
+word found: 3
+word length: 1
+H
+word found: 1
+E
+word found: 1
+H
+word found: 1
+@
+word found: 1
+H
+word found: 1
+E
+word found: 1
+}
+word found: 1
+t
+word found: 1
++
+word found: 1
+H
+word found: 1
+M
+word found: 1
+E
+word found: 1
+H
+word found: 1
+!
+word found: 1
+}
+word found: 1
+t
+word found: 1
++
+word found: 1
+H
+word found: 1
+E
+word found: 1
+H
+word found: 1
+UH
+word found: 2
+SH
+word found: 2
+H
+word found: 1
+}
+word found: 1
+H
+word found: 1
+u
+word found: 1
+U
+word found: 1
+dH
+word found: 2
+%(
+word found: 2
+H
+word found: 1
+E
+word found: 1
+1
+word found: 1
+H
+word found: 1
+H
+word found: 1
+E
+word found: 1
+Hc
+word found: 2
+H
+word found: 1
+H
+word found: 1
+U
+word found: 1
+Hc
+word found: 2
+I
+word found: 1
+A
+word found: 1
+Hc
+word found: 2
+I
+word found: 1
+A
+word found: 1
+H
+word found: 1
+H
+word found: 1
+H
+word found: 1
+H
+word found: 1
+Hk
+word found: 2
+H
+word found: 1
+H
+word found: 1
+H
+word found: 1
+H)
+word found: 2
+H
+word found: 1
+H9
+word found: 2
+t
+word found: 1
+H
+word found: 1
+H
+word found: 1
+$
+word found: 1
+H
+word found: 1
+H)
+word found: 2
+H
+word found: 1
+H
+word found: 1
+t
+word found: 1
+%
+word found: 1
+H
+word found: 1
+H
+word found: 1
+H
+word found: 1
+H
+word found: 1
+H
+word found: 1
+H
+word found: 1
+E
+word found: 1
+H
+word found: 1
+E
+word found: 1
+H
+word found: 1
+E
+word found: 1
+}
+word found: 1
+y
+word found: 1
+H
+word found: 1
+=
+word found: 1
+
+word found: 1
+E
+word found: 1
+#H
+word found: 2
+U
+word found: 1
+M
+word found: 1
+E
+word found: 1
+o
+word found: 1
+E
+word found: 1
+E
+word found: 1
+E
+word found: 1
+Hc
+word found: 2
+H
+word found: 1
+M
+word found: 1
+E
+word found: 1
+H
+word found: 1
+E
+word found: 1
+}
+word found: 1
+E
+word found: 1
+H
+word found: 1
+=
+word found: 1
+
+
+word found: 1
+u*
+word found: 2
+g*
+word found: 2
+9
+word found: 1
+~C
+word found: 2
+e*
+word found: 2
+H
+word found: 1
+=
+word found: 1
+
+
+word found: 1
+@*
+word found: 2
+7*
+word found: 2
+1*
+word found: 2
+H
+word found: 1
+=
+word found: 1
+
+
+word found: 1
+2
+word found: 1
+*
+word found: 1
+H
+word found: 1
+=V
+
+word found: 3
+o
+word found: 1
+)
+word found: 1
+H
+word found: 1
+=X
+
+word found: 3
+V
+word found: 1
+}
+word found: 1
+~
+
+word found: 2
+E
+word found: 1
+V
+word found: 1
+H
+word found: 1
+H
+word found: 1
+E
+word found: 1
+dH3
+word found: 3
+%(
+word found: 2
+t
+word found: 1
+H
+word found: 1
+]
+word found: 1
+UH
+word found: 2
+H
+word found: 1
+@H
+word found: 2
+}
+word found: 1
+H
+word found: 1
+E
+word found: 1
+H
+word found: 1
+E
+word found: 1
+H
+word found: 1
+E
+word found: 1
+E
+word found: 1
+H
+word found: 1
+E
+word found: 1
+@
+word found: 1
+E
+word found: 1
+H
+word found: 1
+E
+word found: 1
+@
+word found: 1
+E
+word found: 1
+H
+word found: 1
+E
+word found: 1
+H
+word found: 1
+@
+word found: 1
+H
+word found: 1
+E
+word found: 1
+E
+word found: 1
+E
+word found: 1
+E
+word found: 1
+E
+word found: 1
+E
+word found: 1
+Hc
+word found: 2
+H
+word found: 1
+E
+word found: 1
+H
+word found: 1
+E
+word found: 1
+V
+word found: 1
+H
+word found: 1
+H
+word found: 1
+U
+word found: 1
+H
+word found: 1
+H
+word found: 1
+%
+word found: 1
+@
+word found: 1
+u"
+word found: 2
+4
+word found: 1
+H
+word found: 1
+H
+word found: 1
+U
+word found: 1
+H
+word found: 1
+H
+word found: 1
+%
+word found: 1
+ 
+word found: 1
+t
+word found: 1
+E
+word found: 1
+E
+word found: 1
+}
+word found: 1
+t|
+word found: 2
+
+
+word found: 1
+E
+word found: 1
+H
+word found: 1
+U
+word found: 1
+Hc
+word found: 2
+H
+word found: 1
+H
+word found: 2
+H
+word found: 1
+
+word found: 1
+H
+word found: 1
+"+
+word found: 2
+E
+word found: 1
+E
+word found: 1
+H
+word found: 1
+U
+word found: 1
+Hc
+word found: 2
+H
+word found: 1
+H
+word found: 2
+H
+word found: 1
+H
+word found: 1
+*
+word found: 1
+E
+word found: 1
+H
+word found: 1
+=
+word found: 1
+	
+word found: 1
+E
+word found: 1
+E
+word found: 1
+E
+word found: 1
+E
+word found: 1
+;E
+word found: 2
+}
+word found: 1
+~i
+word found: 2
+E
+word found: 1
+H
+word found: 1
+U
+word found: 1
+Hc
+word found: 2
+H
+word found: 1
+H
+word found: 2
+H
+word found: 1
+
+word found: 1
+H
+word found: 1
+*
+word found: 1
+E
+word found: 1
+E
+word found: 1
+H
+word found: 1
+U
+word found: 1
+Hc
+word found: 2
+H
+word found: 1
+H
+word found: 2
+Hcurrent strn len: 1
+word length: 1
+H
+word found: 1
+v*
+word found: 2
+E
+word found: 1
+E
+word found: 1
+H
+word found: 1
+=
+word found: 1
+a
+word found: 1
+E
+word found: 1
+H
+word found: 1
+H
+word found: 1
+
+word found: 1
+H
+word found: 1
+'
+word found: 1
+E
+word found: 1
+UH
+word found: 2
+H
+word found: 1
+0
+word found: 1
+}
+word found: 1
+u
+word found: 1
+H
+word found: 1
+U
+word found: 1
+E
+word found: 1
+}
+word found: 1
+E
+word found: 1
+E
+word found: 1
+E
+word found: 1
+U
+word found: 1
+)
+word found: 1
+E
+word found: 1
+E
+word found: 1
+U
+word found: 1
+E
+word found: 1
+E
+word found: 1
+E
+word found: 1
+E
+word found: 1
+Hc
+word found: 2
+H
+word found: 1
+H
+word found: 1
+H
+word found: 1
+H
+word found: 1
+H
+word found: 1
+H
+word found: 1
+'
+word found: 1
+E
+word found: 1
+E
+word found: 1
+Hc
+word found: 2
+H
+word found: 1
+H
+word found: 1
+H
+word found: 1
+H
+word found: 1
+H
+word found: 1
+H
+word found: 1
+'
+word found: 1
+E
+word found: 1
+E
+word found: 1
+Hc
+word found: 2
+H
+word found: 1
+H
+word found: 1
+H
+word found: 1
+H
+word found: 1
+H
+word found: 1
+H
+word found: 1
+'
+word found: 1
+E
+word found: 1
+E
+word found: 1
+Hc
+word found: 2
+H
+word found: 1
+H
+word found: 1
+H
+word found: 1
+H
+word found: 1
+H
+word found: 1
+H
+word found: 1
+o'
+word found: 2
+H
+word found: 1
+E
+word found: 1
+H
+word found: 1
+E
+word found: 1
+Hc
+word found: 2
+H
+word found: 1
+H
+word found: 1
+H
+word found: 1
+H
+word found: 1
+H
+word found: 1
+='
+word found: 2
+H
+word found: 1
+E
+word found: 1
+H
+word found: 1
+H
+word found: 1
+
+word found: 1
+H
+word found: 1
+(
+word found: 1
+H
+word found: 1
+H
+word found: 1
+H
+word found: 1
+H
+word found: 1
+t
+word found: 1
+H
+word found: 1
+=Q
+word found: 2
+l
+word found: 1
+E
+word found: 1
+E
+word found: 1
+E
+word found: 1
+E
+word found: 1
+E
+word found: 1
+E
+word found: 1
+;E
+word found: 2
+E
+word found: 1
+)
+word found: 1
+E
+word found: 1
+H
+word found: 1
+H
+word found: 1
+H
+word found: 1
+9(
+word found: 2
+H
+word found: 1
+H
+word found: 1
+(
+word found: 1
+E
+word found: 1
+E
+word found: 1
+;E
+word found: 2
+|
+word found: 1
+UH
+word found: 2
+H
+word found: 1
+ 
+word found: 1
+E
+word found: 1
+0
+word found: 1
+E
+word found: 1
+E
+word found: 1
+H
+word found: 1
+U
+word found: 1
+Hc
+word found: 2
+H
+word found: 1
+H
+word found: 2
+H
+word found: 1
+H
+word found: 1
+S(
+word found: 2
+H
+word found: 1
+H
+word found: 1
+E
+word found: 1
+E
+word found: 1
+E
+word found: 1
+E
+word found: 1
+H
+word found: 1
+=
+word found: 1
+?
+word found: 1
+%
+word found: 1
+t)
+word found: 2
+E
+word found: 1
+u"
+word found: 2
+U
+word found: 1
+%
+word found: 1
+E
+word found: 1
+%
+word found: 1
+%
+word found: 1
+%
+word found: 1
+t
+word found: 1
+E
+word found: 1
+t
+word found: 1
+U
+word found: 1
+%
+word found: 1
+%
+word found: 1
+E
+word found: 1
+t+
+word found: 2
+t%
+word found: 2
+u!
+word found: 2
+f%
+word found: 2
+E
+word found: 1
+a%
+word found: 2
+H
+word found: 1
+=%
+word found: 2
+O
+word found: 1
+E
+word found: 1
+~
+word found: 1
+9%
+word found: 2
+0%
+word found: 2
+.%
+word found: 2
+9E
+word found: 2
+~	
+word found: 2
+E
+word found: 1
+ %
+word found: 2
+E
+word found: 1
+E
+word found: 1
+H
+word found: 1
+H
+word found: 1
+H
+word found: 1
+ %
+word found: 2
+9E
+word found: 2
+E
+word found: 1
+$
+word found: 1
+9E
+word found: 2
+UH
+word found: 2
+H
+word found: 1
+H
+word found: 1
+(
+word found: 1
+$
+word found: 1
+dH
+word found: 2
+%(
+word found: 2
+H
+word found: 1
+E
+word found: 1
+1
+word found: 1
+H
+word found: 1
+(
+word found: 1
+H
+word found: 1
+Y
+word found: 1
+P
+word found: 1
+P
+word found: 1
+y
+word found: 1
+H
+word found: 1
+=
+word found: 1
+N
+word found: 1
+t
+word found: 1
+H
+word found: 1
+`
+word found: 1
+P
+word found: 1
+H
+word found: 1
+y
+word found: 1
+H
+word found: 1
+=:
+word found: 2
+C
+word found: 1
+H
+word found: 1
+E
+word found: 1
+H
+word found: 1
+P
+word found: 1
+A
+word found: 1
+A
+word found: 1
+word length: 1
+y
+word found: 1
+H
+word found: 1
+X
+word found: 1
+H
+word found: 1
+X
+word found: 1
+u
+word found: 1
+H
+word found: 1
+=
+word found: 1
+H
+word found: 1
+E
+word found: 1
+T
+word found: 1
+@
+word found: 1
+D
+word found: 1
+H
+word found: 1
+L
+word found: 1
+L
+word found: 1
+Hc
+word found: 2
+H
+word found: 1
+X
+word found: 1
+H
+word found: 1
+?
+word found: 1
+H
+word found: 1
+H
+word found: 1
+?
+word found: 1
+H
+word found: 1
+H
+word found: 1
+%
+word found: 1
+@
+word found: 1
+u%
+word found: 2
+H
+word found: 1
+H
+word found: 1
+?
+word found: 1
+H
+word found: 1
+H
+word found: 1
+%
+word found: 1
+ 
+word found: 1
+t
+word found: 1
+H
+word found: 1
+?
+word found: 1
+`
+word found: 1
+4
+word found: 1
+H
+word found: 1
+~
+word found: 1
+@
+word found: 1
+H
+word found: 1
+;
+word found: 1
+D
+word found: 1
+~
+word found: 2
+H
+word found: 1
+D
+word found: 1
+H
+word found: 1
+L
+word found: 1
+L
+word found: 1
+;
+word found: 1
+T
+word found: 1
+6
+word found: 1
+H
+word found: 1
+H
+word found: 1
+=
+word found: 1
+H
+word found: 1
+H
+word found: 1
+~
+word found: 1
+@
+word found: 1
+H
+word found: 1
+;
+word found: 1
+D
+word found: 1
+~
+word found: 2
+H
+word found: 1
+D
+word found: 1
+T
+word found: 1
+H
+word found: 1
+=
+word found: 1
+@
+word found: 1
+H
+word found: 1
+=
+word found: 1
+D
+word found: 1
+H
+word found: 1
+=
+word found: 1
+P
+word found: 1
+~
+word found: 2
+P
+word found: 1
+H
+word found: 1
+E
+word found: 1
+dH3
+word found: 3
+%(
+word found: 2
+t
+word found: 1
+UH
+word found: 2
+H
+word found: 1
+}
+word found: 1
+}
+word found: 1
+ 
+word found: 1
+~
+word found: 1
+H
+word found: 1
+=O
+word found: 2
+R
+word found: 1
+UH
+word found: 2
+H
+word found: 1
+ H
+word found: 2
+}
+word found: 1
+E
+word found: 1
+H
+word found: 1
+E
+word found: 1
+H
+word found: 1
+E
+word found: 1
+H
+word found: 1
+E
+word found: 1
+H
+word found: 1
+E
+word found: 1
+tO
+word found: 2
+H
+word found: 1
+H
+word found: 1
+E
+word found: 1
+H
+word found: 1
+H
+word found: 1
+H
+word found: 1
+%
+word found: 1
+t
+word found: 1
+%
+word found: 1
+U
+word found: 1
+H
+word found: 1
+E
+word found: 1
+0
+word found: 1
+E
+word found: 1
+H
+word found: 1
+E
+word found: 1
+H
+word found: 1
+E
+word found: 1
+t(
+word found: 2
+H
+word found: 1
+H
+word found: 1
+E
+word found: 1
+H
+word found: 1
+H
+word found: 1
+H
+word found: 1
+%
+word found: 1
+u
+word found: 1
+E
+word found: 1
+f.
+word found: 2
+AWL
+word found: 3
+=C
+word found: 2
+AVI
+word found: 3
+AUI
+word found: 3
+ATA
+word found: 3
+UH
+word found: 2
+-4
+word found: 2
+SL)
+word found: 3
+H
+word found: 1
+H
+word found: 1
+t
+word found: 1
+1
+word found: 1
+L
+word found: 1
+L
+word found: 1
+D
+word found: 1
+A
+word found: 1
+H
+word found: 1
+H9
+word found: 2
+u
+word found: 1
+H
+word found: 1
+[]A\A]A^A_
+word found: 10
+ff.
+word found: 3
+f.
+word found: 2
+H
+word found: 1
+]
+word found: 1
+H
+word found: 1
+H
+word found: 1
+word length: 1
+Invalid number of arguments
+word found: 27
+mmap
+word found: 4
+Using memory mapping
+word found: 20
+%d threads
+
+word found: 11
+could not open file
+word found: 19
+File size: %d
+
+word found: 14
+Maximum string length: %d
+
+word found: 26
+Strings of at least length 4: %d
+
+word found: 33
+word found: %d
+
+word found: 15
+current strn len: %d
+
+word found: 21
+could not create threads
+
+word found: 25
+word length: %d
+
+word found: 16
+here!!
+word found: 6
+coul not stat file to obtain its size
+
+word found: 38
+could not mmap file
+word found: 19
+curr string len: %d
+
+word found: 20
+read size is too large.
+word found: 23
+;
+word found: 1
+0
+word found: 1
+T
+word found: 1
+t
+word found: 1
+x
+word found: 1
+z
+word found: 1
+p
+word found: 1
+`
+word found: 1
+x
+word found: 1
+zR
+word found: 2
+x
+word found: 1
+
+word found: 1
+(
+word found: 1
+/
+word found: 1
+D
+word found: 1
+$
+word found: 1
+4
+word found: 1
+F
+word found: 1
+J
+word found: 1
+w
+word found: 2
+?
+word found: 1
+:*3$"
+word found: 5
+\
+word found: 1
+t
+word found: 1
+%
+word found: 1
+E
+word found: 1
+C
+word found: 2
+
+word found: 1
+ 
+word found: 1
+E
+word found: 1
+C
+word found: 2
+E
+word found: 1
+
+word found: 1
+
+word found: 1
+E
+word found: 1
+C
+word found: 2
+
+word found: 1
+`
+word found: 1
+E
+word found: 1
+C
+word found: 2
+
+word found: 1
+[
+word found: 1
+E
+word found: 1
+C
+word found: 2
+R
+word found: 1
+
+word found: 1
+0
+word found: 1
+E
+word found: 1
+C
+word found: 2
+
+word found: 1
+P
+word found: 1
+1
+word found: 1
+E
+word found: 1
+C
+word found: 2
+h
+word found: 2
+ 
+word found: 1
+p
+word found: 1
+E
+word found: 1
+C
+word found: 2
+
+word found: 1
+D
+word found: 1
+P
+word found: 1
+e
+word found: 1
+F
+word found: 1
+I
+word found: 1
+E
+word found: 1
+ 
+word found: 1
+E
+word found: 1
+(
+word found: 1
+D
+word found: 1
+0
+word found: 1
+H
+word found: 1
+8
+word found: 1
+G
+word found: 1
+@n
+word found: 2
+8A
+word found: 2
+0A
+word found: 2
+(B
+word found: 2
+ B
+word found: 2
+B
+word found: 1
+B
+word found: 1
+x
+word found: 1
+p
+word found: 1
+word length: 27
+ 
+word found: 1
+s
+word found: 1
+
+word found: 1
+
+word found: 1
+t
+word found: 1
+0=
+word found: 2
+8=
+word found: 2
+o
+word found: 1
+
+
+word found: 1
+&
+word found: 1
+
+word found: 1
+@?
+word found: 2
+P
+word found: 1
+	
+word found: 1
+o
+word found: 1
+o
+word found: 1
+0
+word found: 1
+o
+word found: 1
+o
+word found: 1
+o
+word found: 1
+@=
+word found: 2
+0
+word found: 1
+@
+word found: 1
+P
+word found: 1
+`
+word found: 1
+p
+word found: 1
+ 
+word found: 1
+word length: 1
+@
+word found: 1
+GCC: (Ubuntu 9.4.0-1ubuntu1~20.04.2) 9.4.0
+word found: 42
+8
+word found: 1
+X
+word found: 1
+|
+word found: 1
+	
+word found: 1
+0
+word found: 1
+
+
+word found: 1
+
+word found: 1
+P
+word found: 1
+
+word found: 1
+
+word found: 1
+ 
+word found: 1
+0
+word found: 1
+@
+word found: 1
+@
+word found: 1
+t
+word found: 1
+ 
+word found: 1
+p!
+word found: 2
+!
+word found: 1
+0=
+word found: 2
+8=
+word found: 2
+@=
+word found: 2
+@?
+word found: 2
+@
+word found: 1
+ @
+word found: 2
+
+word found: 1
+p
+word found: 1
+!
+word found: 1
+7
+word found: 1
+ @
+word found: 2
+F
+word found: 1
+8=
+word found: 2
+m
+word found: 1
+ 
+word found: 1
+y
+word found: 1
+0=
+word found: 2
+#
+word found: 1
+word length: 1
+:
+word found: 1
+`
+word found: 1
+8=
+word found: 2
+@=
+word found: 2
+0=
+word found: 2
+p!
+word found: 2
+@?
+word found: 2
+
+word found: 1
+L
+word found: 1
+P
+word found: 1
+-
+word found: 1
+B
+word found: 1
+^
+word found: 1
+ 
+word found: 1
+ 
+word found: 1
+@
+word found: 1
+z
+word found: 1
+@@
+word found: 2
+@
+word found: 1
+@
+word found: 1
+@
+word found: 1
+@
+word found: 1
+'
+word found: 1
+t
+word found: 1
+$@
+word found: 2
+[
+word found: 1
+,@
+word found: 2
+h
+word found: 1
+%
+word found: 1
+8
+word found: 1
+C
+word found: 1
+H
+word found: 1
+Z
+word found: 1
+y
+word found: 1
+B
+word found: 1
+@
+word found: 1
+ 
+word found: 1
+@
+word found: 1
+ 
+word found: 1
+N
+word found: 1
+B
+word found: 1
+e
+word found: 1
+B
+word found: 1
+@
+word found: 1
+word length: 1
+/
+word found: 1
+@
+word found: 1
+)
+word found: 1
+%
+word found: 1
+1
+word found: 1
+&
+word found: 1
+8
+word found: 1
+`
+word found: 1
+@
+word found: 1
+T
+word found: 1
+n
+word found: 1
+@
+word found: 1
+(@
+word found: 2
+ 
+word found: 1
+0@
+word found: 2
+"
+word found: 1
+crtstuff.c
+word found: 10
+deregister_tm_clones
+word found: 20
+__do_global_dtors_aux
+word found: 21
+completed.8061
+word found: 14
+__do_global_dtors_aux_fini_array_entry
+word found: 38
+frame_dummy
+word found: 11
+__frame_dummy_init_array_entry
+word found: 30
+proj6.c
+word found: 7
+__FRAME_END__
+word found: 13
+__init_array_end
+word found: 16
+_DYNAMIC
+word found: 8
+__init_array_start
+word found: 18
+__GNU_EH_FRAME_HDR
+word found: 18
+_GLOBAL_OFFSET_TABLE_
+word found: 21
+extract_number
+word found: 14
+threadify
+word found: 9
+__libc_csu_fini
+word found: 15
+putchar@@GLIBC_2.2.5
+word found: 20
+pthread_create@@GLIBC_2.2.5
+word found: 27
+_ITM_deregisterTMCloneTable
+word found: 27
+words_per_thread
+word found: 16
+puts@@GLIBC_2.2.5
+word found: 17
+thread_count
+word found: 12
+_edata
+word found: 6
+args
+word found: 4
+four_or_greater
+word found: 15
+__stack_chk_fail@@GLIBC_2.4
+word found: 27
+mmap@@GLIBC_2.2.5
+word found: 17
+printf@@GLIBC_2.2.5
+word found: 19
+combine
+word found: 7
+partial_flag
+word found: 12
+process
+word found: 7
+close@@GLIBC_2.2.5
+word found: 18
+memory_map_file
+word found: 15
+read@@GLIBC_2.2.5
+word found: 17
+__libc_start_main@@GLIBC_2.2.5
+word found: 30
+threads
+word found: 7
+__data_start
+word found: 12
+stcurrent strn len: 2
+word length: 1
+rcmp@@GLIBC_2.2.5
+word found: 17
+__gmon_start__
+word found: 14
+__dso_handle
+word found: 12
+_IO_stdin_used
+word found: 14
+read_file
+word found: 9
+words
+word found: 5
+__libc_csu_init
+word found: 15
+__fxstat@@GLIBC_2.2.5
+word found: 21
+__bss_start
+word found: 11
+main
+word found: 4
+validate_readsize
+word found: 17
+open@@GLIBC_2.2.5
+word found: 17
+__fstat
+word found: 7
+perror@@GLIBC_2.2.5
+word found: 19
+pthread_join@@GLIBC_2.2.5
+word found: 25
+atoi@@GLIBC_2.2.5
+word found: 17
+exit@@GLIBC_2.2.5
+word found: 17
+__TMC_END__
+word found: 11
+max_len
+word found: 7
+_ITM_registerTMCloneTable
+word found: 25
+partial_word_len
+word found: 16
+__cxa_finalize@@GLIBC_2.2.5
+word found: 27
+__ctype_b_loc@@GLIBC_2.3
+word found: 24
+.symtab
+word found: 7
+.strtab
+word found: 7
+.shstrtab
+word found: 9
+.interp
+word found: 7
+.note.gnu.property
+word found: 18
+.note.gnu.build-id
+word found: 18
+.note.ABI-tag
+word found: 13
+.gnu.hash
+word found: 9
+.dynsym
+word found: 7
+.dynstr
+word found: 7
+.gnu.version
+word found: 12
+.gnu.version_r
+word found: 14
+.rela.dyn
+word found: 9
+.rela.plt
+word found: 9
+.init
+word found: 5
+.plt.got
+word found: 8
+.plt.sec
+word found: 8
+.text
+word found: 5
+.fini
+word found: 5
+.rodata
+word found: 7
+.eh_frame_hdr
+word found: 13
+.eh_frame
+word found: 9
+.init_array
+word found: 11
+.fini_array
+word found: 11
+.dynamic
+word found: 8
+.data
+word found: 5
+.bss
+word found: 4
+.comment
+word found: 8
+#
+word found: 1
+8
+word found: 1
+8
+word found: 1
+ 
+word found: 1
+6
+word found: 1
+X
+word found: 1
+X
+word found: 1
+$
+word found: 1
+I
+word found: 1
+|
+word found: 1
+|
+word found: 1
+ 
+word found: 1
+W
+word found: 1
+o
+word found: 1
+$
+word found: 1
+word length: 17
+a
+word found: 1
+
+word found: 1
+i
+word found: 1
+&
+word found: 1
+q
+word found: 1
+o
+word found: 1
+,
+word found: 1
+~
+word found: 1
+o
+word found: 1
+0
+word found: 1
+0
+word found: 1
+`
+word found: 1
+B
+word found: 1
+P
+word found: 1
+P
+word found: 1
+ 
+word found: 1
+ 
+word found: 1
+0
+word found: 1
+0
+word found: 1
+@
+word found: 1
+@
+word found: 1
+@
+word found: 1
+@
+word found: 1
+3
+word found: 2
+t
+word found: 1
+t
+word found: 1
+
+word found: 1
+ 
+word found: 1
+ 
+word found: 1
+p
+word found: 1
+p!
+word found: 2
+p!
+word found: 2
+!
+word found: 1
+!
+word found: 1
+0=
+word found: 2
+0-
+word found: 2
+word length: 1
+8=
+word found: 2
+8-
+word found: 2
+@=
+word found: 2
+@-
+word found: 2
+@?
+word found: 2
+@/
+word found: 2
+@
+word found: 1
+0
+word found: 1
+
+word found: 1
+ @
+word found: 2
+0
+word found: 1
+`
+word found: 1
+ 
+word found: 1
+0
+word found: 1
+0
+word found: 1
++
+word found: 1
+@0
+word found: 2
+0	
+word found: 2
+/
+word found: 1
+	
+word found: 1
+p9
+word found: 2
+v=
+word found: 2
+word length: 2
+File size: 18000
+Maximum string length: 27
+Strings of at least length 4: 2

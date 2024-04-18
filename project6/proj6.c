@@ -13,7 +13,7 @@
 #define DEFAULT_BUFSIZE 1024
 #define MAX_READ_SIZE 8192
 #define MAX_THREADS 16
-#define MAX_WORDS 128
+#define MAX_WORDS 8192
 
 int four_or_greater = 0;
 int max_len = 0;
@@ -96,9 +96,14 @@ void read_file(int read_size, const char *filename, int thread_count)
 
     printf("File size: %d\n", file_size);
     
+    
+    if(partial_word_len >= 4) {
+        printf("partial word len: %d\n",partial_word_len);
+        four_or_greater++;
+    }
+    
     if(partial_word_len > max_len) {
         printf("Maximum string length: %d\n", partial_word_len);
-        four_or_greater++;
         printf("Strings of at least length 4: %d\n", four_or_greater);
 
     } else {
@@ -134,6 +139,10 @@ void * process(void * arg) {
             } else {
                 // store the word in the array
             
+                if(curr_string_len == 0) {
+                    continue;
+                }
+
                 words[thread_id][word_count].length = curr_string_len;
                 words[thread_id][word_count].is_partial = 0;
                 curr_string_len = 0;
@@ -147,11 +156,9 @@ void * process(void * arg) {
         words[thread_id][word_count].length = curr_string_len;
         words[thread_id][word_count].is_partial = 1;
         word_count++;
-        printf("current strn len: %d\n",curr_string_len);
     }
 
     words_per_thread[thread_id] = word_count;
-    
 }
 
 void threadify(int bytes_read, int thread_count, char * buf) {
@@ -190,14 +197,11 @@ void threadify(int bytes_read, int thread_count, char * buf) {
 void combine() {
     // look through all the words
     for(int i = 0; i < thread_count; i++) {
-        for(int j = 0; j < words_per_thread[i]; i++) {
+        for(int j = 0; j < words_per_thread[i]; j++) {
             struct word curr_word = words[i][j];
             int word_len;
 
             word_len = curr_word.length; // DEFAULT CASE
-            printf("word length: %d\n", word_len);
-            //printf("is partial: %d\n", curr_word.is_partial);
-
 
             // handle partials first
             if(partial_flag && !curr_word.is_partial) {
@@ -218,11 +222,11 @@ void combine() {
 
                 partial_flag = 1; 
                 partial_word_len = curr_word.length;
-                printf("here!!\n");
+                //printf("here!!\n");
                 break; // no need to keep looking!
             }
 
-            if(curr_word.length > 4) {
+            if(word_len >= 4) {
                 four_or_greater++;
             }
 
@@ -268,7 +272,7 @@ void memory_map_file(const char * filename, int thread_count) {
                     // if it is a printable character, we must increase the count of bytes read
                     // string lenth, and the
                     curr_string_len++; // increment current string length
-                    printf("%c", current_byte);
+                    //printf("%c", current_byte);
                 }
                 else
                 {
@@ -286,7 +290,7 @@ void memory_map_file(const char * filename, int thread_count) {
                 }
             }
 
-            printf("curr string len: %d\n", curr_string_len) ;
+            //printf("curr string len: %d\n", curr_string_len) ;
 
          if (curr_string_len >= 4)
                     {
