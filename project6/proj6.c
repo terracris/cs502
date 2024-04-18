@@ -166,34 +166,68 @@ void *process(void *arg)
     words_per_thread[thread_id] = word_count;
 }
 
+// void threadify(int bytes_read, int thread_count, char *buf)
+// {
+//     // now make the threads
+
+//     // define the chunk size by the number of bytes read
+//     int chunk_size = bytes_read / thread_count; // even if its one thread reading everything
+//     int remainder = bytes_read - (thread_count * chunk_size);
+
+//     int start = 0;
+//     int end = chunk_size + remainder;
+
+//     for (int i = 0; i < thread_count; i++)
+//     {
+//         args[i].id = i;
+//         args[i].start = start;
+//         args[i].end = end;
+//         args[i].buffer = buf;
+//         if (pthread_create(&threads[i], NULL, (void *)process, (void *)&args[i]) != 0)
+//         {
+//             perror("could not create threads\n");
+//             exit(1);
+//         }
+
+//         start = end;
+//         end += chunk_size;
+//     }
+
+//     // then wait for all threads to terminate
+//     for (int i = 0; i < thread_count; i++)
+//     {
+//         pthread_join(threads[i], NULL);
+//     }
+// }
+
 void threadify(int bytes_read, int thread_count, char *buf)
 {
-    // now make the threads
-
-    // define the chunk size by the number of bytes read
-    int chunk_size = bytes_read / thread_count; // even if its one thread reading everything
-    int remainder = bytes_read - (thread_count * chunk_size);
-
+    int chunk_size = (bytes_read + thread_count - 1) / thread_count; // Round up division
     int start = 0;
-    int end = chunk_size + remainder;
+    int end = 0;
 
     for (int i = 0; i < thread_count; i++)
     {
+        start = end;
+        end = start + chunk_size;
+        if (end > bytes_read)
+        {
+            end = bytes_read;
+        }
+
         args[i].id = i;
         args[i].start = start;
         args[i].end = end;
         args[i].buffer = buf;
-        if (pthread_create(&threads[i], NULL, (void *)process, (void *)&args[i]) != 0)
+
+        if (pthread_create(&threads[i], NULL, process, (void *)&args[i]) != 0)
         {
             perror("could not create threads\n");
             exit(1);
         }
-
-        start = end;
-        end += chunk_size;
     }
 
-    // then wait for all threads to terminate
+    // Wait for all threads to finish
     for (int i = 0; i < thread_count; i++)
     {
         pthread_join(threads[i], NULL);
