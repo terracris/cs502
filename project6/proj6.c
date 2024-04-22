@@ -44,6 +44,7 @@ int main(int argc, char *argv[])
         {
             printf("Using memory mapping\n");
             memory_mapped = 1;
+            read_flag = 0; // disable read flag
         }
         else
         {
@@ -312,51 +313,25 @@ void memory_map_file(const char *filename, int thread_count)
 
     // now that we have opened the file, we are all set to read from it
     int file_size = sb.st_size;
-    int strings_of_size_4_or_greater = 0;
-    int max_string_len = 0;
-    int curr_string_len = 0;
+    threadify(file_size, thread_count, pchFile);
+    //visualize(); // need to visualize my words
+    combine();
 
-    for (int i = 0; i < file_size; i++)
+    if (partial_word_len >= 4)
     {
-        char current_byte = pchFile[i];
-        if (isprint(current_byte) || isspace(current_byte))
-        {
-            // if it is a printable character, we must increase the count of bytes read
-            // string lenth, and the
-            curr_string_len++; // increment current string length
-            // printf("%c", current_byte);
-        }
-        else
-        {
-            if (curr_string_len >= 4)
-            {
-                strings_of_size_4_or_greater++;
-            }
-
-            if (curr_string_len > max_string_len)
-            {
-                max_string_len = curr_string_len;
-            }
-
-            curr_string_len = 0;
-        }
+        four_or_greater++;
     }
 
-    // printf("curr string len: %d\n", curr_string_len) ;
-
-    if (curr_string_len >= 4)
+    if (partial_word_len > max_len)
     {
-        strings_of_size_4_or_greater++;
+        printf("Maximum string length: %d\n", partial_word_len);
+        printf("Strings of at least length 4: %d\n", four_or_greater);
     }
-
-    if (curr_string_len > max_string_len)
+    else
     {
-        max_string_len = curr_string_len;
+        printf("Maximum string length: %d\n", max_len);
+        printf("Strings of at least length 4: %d\n", four_or_greater);
     }
-
-    printf("File size: %d\n", file_size);
-    printf("Strings of at least length 4: %d\n", strings_of_size_4_or_greater);
-    printf("Maximum string length: %d\n", max_string_len);
 
     if (fd > 0)
         close(fd);
