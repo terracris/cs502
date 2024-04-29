@@ -1,0 +1,126 @@
+Script started on 2024-02-05 15:45:48-05:00 [TERM="xterm-256color" TTY="/dev/pts/1" COLUMNS="122" LINES="34"]
+ _______________________________________
+< Are you sure the back door is locked? >
+ ---------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+]0;cristobal@cristobal: ~/cs/cs502/project2[01;32mcristobal@cristobal[00m:[01;34m~/cs/cs502/project2[00m$ ./traceanal < ls.slog 
+AAA: 143 invoked system call instances from 23 unique system calls.
+close 11
+getdents64 2
+write 1
+exit_group 1
+set_robust_list 1
+fstat 10
+openat 33
+set_tid_address 1
+arch_prctl 2
+pread64 8
+brk 3
+stat 16
+ioctl 2
+mmap 27
+prlimit64 1
+rt_sigprocmask 1
+statfs 2
+execve 1
+rt_sigaction 2
+access 2
+read 7
+mprotect 8
+munmap 1
+]0;cristobal@cristobal: ~/cs/cs502/project2[01;32mcristobal@cristobal[00m:[01;34m~/cs/cs502/project2[00m$ ./traceanal seq < ls.slog 
+AAA: 143 invoked system call instances from 23 unique system calls.
+close 11
+close:openat 4
+close:openat 1
+close:mmap 1
+close:access 1
+close:ioctl 1
+close:fstat 1
+close:close 1
+close:exit_group 1
+getdents64 2
+getdents64:getdents64 1
+getdents64:close 1
+write 1
+write:close 1
+exit_group 1
+set_robust_list 1
+set_robust_list:rt_sigaction 1
+fstat 10
+fstat:mmap 4
+fstat:mmap 1
+fstat:pread64 1
+fstat:pread64 1
+fstat:read 1
+fstat:getdents64 1
+fstat:write 1
+openat 33
+openat:stat 15
+openat:stat 1
+openat:fstat 4
+openat:read 5
+openat:openat 7
+openat:openat 1
+set_tid_address 1
+set_tid_address:set_robust_list 1
+arch_prctl 2
+arch_prctl:access 1
+arch_prctl:mprotect 1
+pread64 8
+pread64:pread64 3
+pread64:pread64 1
+pread64:fstat 2
+pread64:mmap 1
+pread64:mmap 1
+brk 3
+brk:arch_prctl 1
+brk:brk 1
+brk:openat 1
+stat 16
+stat:openat 15
+stat:openat 1
+ioctl 2
+ioctl:ioctl 1
+ioctl:openat 1
+mmap 27
+mmap:close 7
+mmap:mmap 18
+mmap:mprotect 1
+mmap:arch_prctl 1
+prlimit64 1
+prlimit64:statfs 1
+rt_sigprocmask 1
+rt_sigprocmask:prlimit64 1
+statfs 2
+statfs:statfs 1
+statfs:brk 1
+execve 1
+execve:brk 1
+rt_sigaction 2
+rt_sigaction:rt_sigaction 1
+rt_sigaction:rt_sigprocmask 1
+access 2
+access:openat 1
+access:openat 1
+read 7
+read:fstat 3
+read:pread64 1
+read:pread64 1
+read:read 1
+read:close 1
+mprotect 8
+mprotect:mmap 1
+mprotect:mprotect 5
+mprotect:mprotect 1
+mprotect:munmap 1
+munmap 1
+munmap:set_tid_address 1
+]0;cristobal@cristobal: ~/cs/cs502/project2[01;32mcristobal@cristobal[00m:[01;34m~/cs/cs502/project2[00m$ exit
+exit
+
+Script done on 2024-02-05 15:47:27-05:00 [COMMAND_EXIT_CODE="0"]

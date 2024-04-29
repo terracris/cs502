@@ -1,0 +1,131 @@
+/lib64/ld-linux-x86-64.so.2
+libpthread.so.0
+_ITM_deregisterTMCloneTable
+_ITM_registerTMCloneTable
+close
+pthread_join
+pthread_create
+read
+open
+libc.so.6
+exit
+perror
+puts
+__stack_chk_fail
+printf
+mmap
+__ctype_b_loc
+atoi
+__cxa_finalize
+strcmp
+__libc_start_main
+__fxstat
+GLIBC_2.3
+GLIBC_2.4
+GLIBC_2.2.5
+__gmon_start__
+u+UH
+[]A\A]A^A_
+Invalid number of arguments
+mmap
+Using memory mapping
+%d threads
+could not open file
+File size: %d
+partial word len: %d
+Maximum string length: %d
+Strings of at least length 4: %d
+could not create threads
+coul not stat file to obtain its size
+could not mmap file
+read size is too large.
+:*3$"
+GCC: (Ubuntu 9.4.0-1ubuntu1~20.04.2) 9.4.0
+crtstuff.c
+deregister_tm_clones
+__do_global_dtors_aux
+completed.8061
+__do_global_dtors_aux_fini_array_entry
+frame_dummy
+__frame_dummy_init_array_entry
+proj6.c
+__FRAME_END__
+__init_array_end
+_DYNAMIC
+__init_array_start
+__GNU_EH_FRAME_HDR
+_GLOBAL_OFFSET_TABLE_
+extract_number
+threadify
+__libc_csu_fini
+pthread_create@@GLIBC_2.2.5
+_ITM_deregisterTMCloneTable
+words_per_thread
+puts@@GLIBC_2.2.5
+thread_count
+_edata
+args
+four_or_greater
+__stack_chk_fail@@GLIBC_2.4
+mmap@@GLIBC_2.2.5
+printf@@GLIBC_2.2.5
+combine
+partial_flag
+process
+close@@GLIBC_2.2.5
+memory_map_file
+read@@GLIBC_2.2.5
+__libc_start_main@@GLIBC_2.2.5
+threads
+__data_start
+strcmp@@GLIBC_2.2.5
+__gmon_start__
+__dso_handle
+_IO_stdin_used
+read_file
+words
+__libc_csu_init
+__fxstat@@GLIBC_2.2.5
+__bss_start
+main
+validate_readsize
+open@@GLIBC_2.2.5
+__fstat
+perror@@GLIBC_2.2.5
+pthread_join@@GLIBC_2.2.5
+atoi@@GLIBC_2.2.5
+exit@@GLIBC_2.2.5
+__TMC_END__
+max_len
+_ITM_registerTMCloneTable
+partial_word_len
+__cxa_finalize@@GLIBC_2.2.5
+__ctype_b_loc@@GLIBC_2.3
+.symtab
+.strtab
+.shstrtab
+.interp
+.note.gnu.property
+.note.gnu.build-id
+.note.ABI-tag
+.gnu.hash
+.dynsym
+.dynstr
+.gnu.version
+.gnu.version_r
+.rela.dyn
+.rela.plt
+.init
+.plt.got
+.plt.sec
+.text
+.fini
+.rodata
+.eh_frame_hdr
+.eh_frame
+.init_array
+.fini_array
+.dynamic
+.data
+.bss
+.comment

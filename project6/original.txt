@@ -1,0 +1,38 @@
+for (int i = 0; i < cnt; i++)
+        {
+           char current_byte = buf[i];
+            if (isprint(current_byte) || isspace(current_byte))
+            {
+                // if it is a printable character, we must increase the count of bytes read
+                // string lenth, and the
+                curr_string_len++; // increment current string length
+            }
+            else
+            {
+                if (curr_string_len >= 4)
+                {
+                    strings_of_size_4_or_greater++;
+                }
+
+                if (curr_string_len > max_string_len)
+                {
+                    max_string_len = curr_string_len;
+                }
+
+                curr_string_len = 0;
+            }
+        }
+
+        file_size += cnt;
+    }
+
+    // final check after exiting the while loop
+    if (curr_string_len >= 4)
+    {
+        strings_of_size_4_or_greater++;
+    }
+
+    if (curr_string_len > max_string_len)
+    {
+        max_string_len = curr_string_len;
+    } 

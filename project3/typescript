@@ -1,0 +1,154 @@
+Script started on 2024-02-18 22:25:33-05:00 [TERM="xterm-256color" TTY="/dev/pts/1" COLUMNS="122" LINES="32"]
+ _________________________________________
+/ Q: "What is the burning question on the \
+| mind of every dyslexic                  |
+|                                         |
+\ existentialist?" A: "Is there a dog?"   /
+ -----------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+]0;cristobal@cristobal: ~/cs/cs502/project3[01;32mcristobal@cristobal[00m:[01;34m~/cs/cs502/project3[00m$ shutdown now[6Pcode .[4Plscd cs/cs502/project3git checkout project3stash[K./threads 1 < msg1.txtmake[K./threads 1 < msg1.txt[13Pgit stashcheckout project3[1Pcd cs/cs502/project3ls[Kcode .shutdown now[Kshutdown now[6Pcode .[4Plscode .shutdown now[K./threads 3 < msg.txt
+to: 1, value: 3
+placed it in mailbox: 1
+----------------------------
+to: 2, value: 4
+placed it in mailbox: 2
+----------------------------
+to: 1, value: 6
+received from: 1
+placed it in mailbox: 1
+----------------------------
+to: 1, value: 5
+----------------------------
+Got the message of: 3
+received from: 2
+----------------------------
+Got the message of: 4
+received from: 1
+placed it in mailbox: 1
+----------------------------
+to: 3, value: 7
+placed it in mailbox: 3
+----------------------------
+to: 2, value: 9
+placed it in mailbox: 2
+----------------------------
+received from: 3
+----------------------------
+Got the message of: 7
+----------------------------
+Got the message of: 6
+received from: 2
+----------------------------
+Got the message of: 9
+received from: 1
+----------------------------
+Got the message of: 5
+placed it in mailbox: 1
+----------------------------
+placed it in mailbox: 2
+----------------------------
+placed it in mailbox: 3
+----------------------------
+received from: 3
+----------------------------
+Got the message of: -1
+received from: 0
+----------------------------
+The result from thread 3 is 7 from 1 operations during 2 secs.
+placed it in mailbox: 0
+----------------------------
+received from: 2
+----------------------------
+Got the message of: -1
+placed it in mailbox: 0
+----------------------------
+received from: 0
+----------------------------
+The result from thread 2 is 13 from 2 operations during 2 secs.
+received from: 1
+----------------------------
+Got the message of: -1
+received from: 0
+----------------------------
+The result from thread 1 is 14 from 3 operations during 3 secs.
+destroyed mailboxes
+destroyed mailboxes
+]0;cristobal@cristobal: ~/cs/cs502/project3[01;32mcristobal@cristobal[00m:[01;34m~/cs/cs502/project3[00m$ ./threads 3 < msg.txt[C[1@n[1@b[1@ 
+to: 1, value: 3
+placed it in mailbox: 1
+----------------------------
+to: 2, value: 4
+placed it in mailbox: 2
+----------------------------
+to: 1, value: 6
+to: 1, value: 5
+to: 3, value: 7
+placed it in mailbox: 3
+----------------------------
+to: 2, value: 9
+Here is what the queue looks like right now
+1 -> 1 -> 2 -> 
+received from: 2
+----------------------------
+Got the message of: 4
+received from: 3
+----------------------------
+Got the message of: 7
+placed it in mailbox: 2
+----------------------------
+received from: 1
+----------------------------
+Got the message of: 3
+placed it in mailbox: 1
+----------------------------
+received from: 2
+----------------------------
+Got the message of: 9
+received from: 1
+----------------------------
+Got the message of: 6
+placed it in mailbox: 1
+----------------------------
+placed it in mailbox: 2
+----------------------------
+received from: 3
+----------------------------
+Got the message of: -1
+placed it in mailbox: 0
+----------------------------
+placed it in mailbox: 3
+----------------------------
+received from: 2
+----------------------------
+Got the message of: -1
+received from: 1
+----------------------------
+placed it in mailbox: 1
+----------------------------
+received from: 0
+----------------------------
+The result from thread 3 is 7 from 1 operations during 1 secs.
+Got the message of: 5
+placed it in mailbox: 0
+----------------------------
+received from: 0
+----------------------------
+The result from thread 2 is 13 from 2 operations during 2 secs.
+received from: 1
+----------------------------
+Got the message of: -1
+placed it in mailbox: 0
+----------------------------
+received from: 0
+----------------------------
+The result from thread 1 is 14 from 3 operations during 3 secs.
+destroyed mailboxes
+destroyed mailboxes
+]0;cristobal@cristobal: ~/cs/cs502/project3[01;32mcristobal@cristobal[00m:[01;34m~/cs/cs502/project3[00m$ exit
+exit
+
+Script done on 2024-02-18 22:26:35-05:00 [COMMAND_EXIT_CODE="0"]

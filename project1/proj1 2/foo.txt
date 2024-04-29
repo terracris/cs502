@@ -1,0 +1,5 @@
+First time executing something from program!
+Dude, operating systems is so cool.
+My program do it is going to determine the word count for now.
+Okay, cool!
+Bye.

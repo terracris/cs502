@@ -1,0 +1,3 @@
+write(1, "dostrace  ls.slog\n", 18)     = 18
+exit_group(0)                           = ?
++++ exited with 0 +++
